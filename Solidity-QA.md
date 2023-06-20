@@ -122,7 +122,18 @@ For solo staking, the minimum deposit required is 32 ETH, which is the amount re
 
 ## (19) What is the difference between fallback and receive?
 
+In version 0.6.x, the fallback function was split into two separate functions:
+
+receive() external payable — for empty calldata (and any value)
+The receive() method is used as a fallback function if Ether are sent to the contract and no calldata are provided (no function is specified).
+
+fallback() external payable — when no other function matches (not even the receive function). Optionally payable.
+
+This separation provides an alternative to the fallback function for contracts that want to receive plain ether.
+
 ## (20) What is reentrancy?
+
+Reentrancy is a programming technique in which a function execution is interrupted by an external function call. Within the the logic of the external function call are conditions that allow it to recursively call itself before the original function execution is able to complete.
 
 ## (21) As of the Shanghai upgrade, what is the gas limit per block?
 
@@ -131,6 +142,8 @@ For solo staking, the minimum deposit required is 32 ETH, which is the amount re
 When view function is executed on-chain, i.e. within mined transaction, it consumes gas, and this protects node from infinite loop
 
 ## (23) What is the difference between tx.origin and msg.sender?
+
+The difference between the two is fairly simple (as of early 2023); tx. origin is the address of the EOA (externally ownder account) that originated the transaction, and msg. sender is the address of whatever called the currently executing smart contract (could be an EOA or a smart contract).
 
 ## (24) How do you send Ether to a contract that does not have payable functions, or a receive or fallback?
 
@@ -164,13 +177,23 @@ View function declares that no state will be changed. Pure function declares tha
 
 ## (26) What is the difference between transferFrom and safeTransferFrom in ERC721?
 
+safeTransfer just ensures that if the destination address is a contract that it has the ability to transfer the token again...essentially making sure that the token doesn't get locked by accident.
+
+The safeTransferFrom functions are almost identical to transferFrom except that they check whether the recipient is a valid ERC721 receiver contract, and if it is, let you pass some data to that contract.
+
 ## (27) How can an ERC1155 token be made into a non-fungible token?
 
 ## (28) What is access control and why is it important?
 
+Access control is an essential security measure when it comes to developing smart contracts in Solidity. Access control ensures that only authorized users can interact with sensitive data and functions within a smart contract, preventing attacks and ensuring the integrity of the blockchain ecosystem.
+
 ## (29) What does a modifier do?
 
+Modifiers in Solidity are special functions that modify the behavior of other functions. They allow developers to add extra conditions or functionality without having to rewrite the entire function.
+
 ## (30) What is the largest value a uint256 can store?
+
+2 \*\*256 - 1 (uint256, has a range of 0 to 2 \*\*256 - 1)
 
 # Medium Questions
 
@@ -178,23 +201,62 @@ View function declares that no state will be changed. Pure function declares tha
 
 ## (2) How do you write a gas-efficient for loop in Solidity?
 
+[read here](https://hackmd.io/@totomanov/gas-optimization-loops)
+
 ## (3) What is a storage collision in a proxy contract?
+
+https://ethereum-blockchain-developer.com/110-upgrade-smart-contracts/06-storage-collisions/
 
 ## (4) What is the difference between abi.encode and abi.encodePacked?
 
+abi.encode uses padding while abi.encodePacked does not. TBD
+
 ## (5) uint8, uint32, uint64, uint128, uint256 are all valid uint sizes. Are there others?
+
+uint16, uint24, uint40, uint48... steps by 8 (byte size).
 
 ## (6) What changed with block.timestamp before and after proof of stake?
 
+Under proof of work, the Ethereum block interval varied, but miners could modify the block timestamp by +/-15 seconds, as long as the modified value was greater than the parent timestamp, without the block getting rejected.
+
+Under proof of stake, the Ethereum block interval is fixed at 12 seconds (or possibly a multiple of 12 seconds, in rare cases).
+
+Validators (formerly miners) can still modify the block.timestamp. Before miners could manipulate the block.timestamp but if they were able to create the block. If they had 20 percent of hash power, they had a 20 percent of chance to create the block, so that their transaction will be confirmed. Even if they created the block, it is extra hard to pass the valid "timestamp".
+
 ## (7) What is frontrunning?
+
+A front-running attack occurs when a malicious user observes a transaction after a user broadcasts it and it is waiting in the mempool. The attacker then sends their own transaction for the motive of gaining some profit with higher gas fees. This will lead to the attacker's transaction being executed before the users.
 
 ## (8) What is a commit-reveal scheme and when would you use it?
 
+The commit-reveal scheme is a technique used in blockchain-based applications to ensure the fairness, transparency, and security of various activities such as voting, auctions, lotteries, quizzes, and gift exchanges. The scheme involves two steps: commit and reveal.
+
+During the commit phase, users submit a commitment that contains the hash of their answer along with a random seed value. The smart contract stores this commitment on the blockchain. Later, during the reveal phase, the user reveals their answer and the seed value. The smart contract then checks that the revealed answer and the hash match, and that the seed value is the same as the one submitted earlier. If everything checks out, the contract accepts the answer as valid and rewards the user accordingly.
+
+The commit-reveal scheme is essential in blockchain-based applications as it ensures that users cannot change their answers once they have submitted them, and prevents others from knowing the answer before the deadline. It also ensures that the process is fair and transparent, providing a secure and reliable way to conduct various activities on a blockchain-based platform.
+
+Why should I use it ?
+Not using the commit-reveal scheme in a blockchain-based application can undermine its fairness and transparency and leave the system vulnerable to various attacks such as :
+
+Front-running attacks: In the absence of the commit-reveal scheme, an attacker can potentially front-run the transaction of a user and submit a transaction with a higher gas price to get their transaction processed first. This can give the attacker an unfair advantage in activities such as auctions or lotteries.
+
+Replay attacks: In a blockchain-based application, a replay attack can happen when a user’s original transaction is replayed in a different context or environment. Without the commit-reveal scheme, an attacker can potentially replay a user’s transaction and manipulate the results in their favour.
+
+Answer substitution attacks: In activities such as quizzes or voting, an attacker can potentially substitute the user’s answer with their own answer in the absence of the commit-reveal scheme. This can lead to an unfair advantage for the attacker and undermine the integrity of the activity.
+
+Sybil attacks: In a blockchain-based application, a Sybil attack happens when an attacker creates multiple identities or accounts to manipulate the system’s results. Without the commit-reveal scheme, an attacker can potentially create multiple accounts and submit multiple answers, skewing the results in their favour.
+
+Ref: [this](https://medium.com/coinmonks/commit-reveal-scheme-in-solidity-c06eba4091bb){:target="\_blank" rel="noopener"}
+
 ## (9) Under what circumstances could abi.encodePacked create a vulnerability?
+
+https://medium.com/swlh/new-smart-contract-weakness-hash-collisions-with-multiple-variable-length-arguments-dc7b9c84e493
 
 ## (10) How does Ethereum determine the BASEFEE in EIP-1559?
 
 ## (11) What is the difference between a cold read and a warm read?
+
+The _Storage_ is one of the four data locations a solidity smart contract has (the others are : _memory_, _calldata_ and _stack_).
 
 ## (12) How does an AMM price assets?
 
