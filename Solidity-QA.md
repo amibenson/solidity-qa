@@ -24,6 +24,13 @@ https://www.youtube.com/watch?v=Zf1tWIQ2vh8&t=21:00
 
 You can submit output of your bot in first hour.
 
+## (5) What is int and uint?
+
+int is an abbreviation for int256, which has a range of -2 ** 255 to 2 ** 255 - 1.
+uint is an abbreviation for uint256, which has a range of 0 to 2 \*\*256 - 1.
+
+For example, uint8 has a range of 0 to 2 \*\* 8 -1.
+
 # Easy Questions
 
 ## (1) What is the difference between private, internal, public, and external functions?
