@@ -173,7 +173,7 @@ e.g address.call{value : 1 ether}(abi.encodeWithSignature('function()')
 
 ## (25) What is the difference between view and pure?
 
-View function declares that no state will be changed. Pure function declares that no state variable will be changed or _read_.
+View function declares that no state will be changed. Pure function declares that no state variable will be changed or *read*.
 
 ## (26) What is the difference between transferFrom and safeTransferFrom in ERC721?
 
@@ -256,7 +256,7 @@ https://medium.com/swlh/new-smart-contract-weakness-hash-collisions-with-multipl
 
 ## (11) What is the difference between a cold read and a warm read?
 
-The _Storage_ is one of the four data locations a solidity smart contract has (the others are : _memory_, _calldata_ and _stack_).
+The *Storage* is one of the four data locations a solidity smart contract has (the others are : *memory*, *calldata* and *stack*).
 
 ## (12) How does an AMM price assets?
 
