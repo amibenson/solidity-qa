@@ -1,7 +1,26 @@
-# 
+#
 
-Questions are based on [this](https://www.rareskills.io/post/solidity-interview-questions){:target="_blank" rel="noopener"}
+https://www.youtube.com/watch?v=Zf1tWIQ2vh8&t=21:00
 
+Questions are based on [this](https://www.rareskills.io/post/solidity-interview-questions){:target="\_blank" rel="noopener"}
+
+# More questions
+
+## (1) What is Solidity Visual Editor for VSCode?
+
+https://marketplace.visualstudio.com/items?itemName=tintinweb.solidity-visual-auditor
+
+## (2) External calls - why marking them? What so bad about them?
+
+https://www.youtube.com/watch?v=Zf1tWIQ2vh8&t=21:00
+
+## (3) What is issue with ++ increment and -- decreament ?
+
+## (4) What are bot races in Code4Arena ?
+
+## (4) What are bot races in Code4Arena ?
+
+You can submit output of your bot in first hour.
 
 # Easy Questions
 
@@ -166,28 +185,56 @@ View function declares that no state will be changed. Pure function declares tha
 
 ## (10) How does Ethereum determine the BASEFEE in EIP-1559?
 
-## (11)
+## (11) What is the difference between a cold read and a warm read?
 
-## (12)
+## (12) How does an AMM price assets?
 
-## (13)
+## (13) What is the effect on gas of making a function payable?
 
-## (14)
+## (14) What is a signature replay attack?
 
-## (15)
+## (15) What is gas griefing?
 
-## (16)
+## (16) ow would you design a game of rock-paper-scissors in a smart contract such that players cannot cheat?
 
-## (17)
+## (17) What is the free memory pointer and where is it stored?
 
-## (18)
+The free memory pointer (located at offset 0x40) is the most crucial part of the EVM memory. It must be handled with care, especially in assembly/Yul.
 
-## (19)
+## (18) What function modifiers are valid for interfaces?
 
-## (20)
+## (19) What is the difference between memory and calldata in a function argument?
 
-## (21)
+## (20) Describe the three types of storage gas costs.
 
-## (22)
+## (21) Why shouldn’t upgradeable contracts use the constructor?
+
+## (22) What is the difference between UUPS and the Transparent Upgradeable Proxy pattern?
+
+## (23) What danger do ERC777 tokens pose?
+
+## (24) What is a bonding curve?
+
+## (25) How does safeMint differ from mint in the OpenZeppelin ERC721 implementation?
+
+## (26) What keywords are provided in Solidity to measure time?
+
+## (27) What is a sandwich attack?
+
+## (28) What is a gas efficient alternative to multiplying and dividing by a multiple of two?
+
+## (29) How large a uint can be packed with an address in one slot?
+
+## (30) Which operations give a partial refund of gas?
+
+## (31) What is ERC165 used for?
+
+## (32) What is a slippage parameter useful for?
+
+## (33) What does ERC721A do to reduce mint costs? What is the tradeoff?
+
+## (34) Why doesn't Solidity support floating point arithmetic?
+
+Solidity does not support floating point values there are many reasons but the most important is that solidity deals with real money and as we all know while division we lose some minor point values when we convert the value back to an integer due to that solidity does not support it.
 
 # High Questions
