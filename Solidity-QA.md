@@ -361,7 +361,7 @@ In the blockchain, a signature replay attack is an attack whereby a previously e
 
 One preventive technique is signing messages with a nonce and the address of the contract. Nonces, acronym for “number used only once”, would make each signed message unique. Also, by including the contract address in the signed message, the signature cannot be used to authenticate transactions for other contracts.
 
-Bad: 
+- ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) Bad: 
 
 ```
 function transfer(address payable to, uint amount, bytes memory signature) external {
@@ -372,7 +372,7 @@ function transfer(address payable to, uint amount, bytes memory signature) exter
 }
 ```
 
-Good: 
+- ![#c5f015](https://placehold.co/15x15/c5f015/c5f015.png) Good: 
 
 ```
 function transfer(address payable to, uint amount, bytes memory signature, uint nonce) external {
