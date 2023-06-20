@@ -1,6 +1,6 @@
 # 
 
-Questions are based on [go](https://www.rareskills.io/post/solidity-interview-questions)]([http://stackoverflow.com](https://www.rareskills.io/post/solidity-interview-questions)):target="_blank" rel="noopener"} 
+Questions are based on [go](https://www.rareskills.io/post/solidity-interview-questions){:target="_blank" rel="noopener"}
 
 # Easy Questions
 
