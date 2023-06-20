@@ -125,11 +125,16 @@ Access types:
 
 **NOTE:** You cannot call a private or internal function in another contract.
 
-Private functions can only be called from inside the contract, even the inherited contracts can't call them ?????. Public functions can be called from anywhere. external :External functions are part of the contract interface, which means they can be called from other contracts and via transactions.
+Private functions can only be called from inside the contract, even the inherited contracts can't call them. Public functions can be called from anywhere. external :External functions are part of the contract interface, which means they can be called from other contracts and via transactions.
 
-In a nutshell, public and external differs in terms of gas usage. The former use more than the latter when used with large arrays of data. This is due to the fact that Solidity copies arguments to memory on a public function while external read from calldata which is cheaper than memory allocation.
+In a nutshell, public and external differs in terms of gas usage. **Public functions use more gas than External functions** when used with large arrays of data. This is due to the fact that **Solidity copies arguments to memory on a public function** while **external read from calldata** which is cheaper than memory allocation.
 
-State variables cannot be marked as external. public − Public functions/ Variables can be used both externally and internally. For public state variable, Solidity automatically creates a getter function. internal − Internal functions/ Variables can only be used internally or by derived contracts.
+State variables cannot be marked as external. 
+
+public − Public functions/ Variables can be used both externally and internally. 
+For public state variable, Solidity automatically creates a getter function.
+
+internal − Internal functions/Variables can only be used internally or by derived contracts.
 
 ## (2) Approximately, how large can a smart contract be?
 
