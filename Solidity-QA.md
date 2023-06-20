@@ -205,7 +205,40 @@ The smallest unit of ETH is called a wei, which is equivalent to 10^-18 ETH. In 
 
 For solo staking, the minimum deposit required is 32 ETH, which is the amount required to run a validator node on the Ethereum network.
 
-## (19) What is the difference between fallback and receive?
+## (19A) Explain: receive() and fallback() functions
+
+When you program smart contracts you are bound to come across different methods to send ether to EOA(externally owned account) or contracts. Before that let’s take a look at fallback and receive function in solidity.
+
+
+Both the fallback and receive functions are special type of functions available in Ethereum.We cannot invoke these functions directly by using their name and they :
+
+- should be declared with external scope visibility
+- can be defined once per contract
+- do not accept any parameters
+- do not return any values
+
+```
+    pragma solidity ^0.8.0;
+    contract Charity {
+        receive() external payable {
+            // React to receiving ether
+        }
+
+        fallback() external payable {
+          
+        }
+    }
+```
+
+The functions are invoked by the EVM when a transaction is sent to the contract but the function selector doesn’t correspond to the signature of any function on the contract, including the case when no data is provided.
+
+- receive() external payable — For empty call data (and any value)
+
+- fallback() external payable — When no other function matches (not even the receive function). Optionally payable.
+
+receive() executes on calls to the contract with no data (calldata), such as calls made via send() or transfer().
+
+## (19B) What is the difference between fallback and receive?
 
 In version 0.6.x, the fallback function was split into two separate functions:
 
@@ -232,7 +265,7 @@ The difference between the two is fairly simple (as of early 2023); tx. origin i
 
 ## (24) How do you send Ether to a contract that does not have payable functions, or a receive or fallback?
 
-a contract just with a payable function can receive ether，but why does the contract need to be add a receive()function to receive ether?
+a contract just with a payable function can receive ether，but why does the contract need to be add a receive() function to receive ether?
 
 is there different between obtained ether via payable function and obtained ether via receive()?
 
@@ -283,6 +316,47 @@ Modifiers in Solidity are special functions that modify the behavior of other fu
 # Medium Questions
 
 ## (1) What is the difference between transfer and send? Why should they not be used?
+
+transfer -> the receiving smart contract should have a fallback function defined or else the transfer call will throw an error. There is a gas limit of 2300 gas, which is enough to complete the transfer operation. It is hardcoded to prevent reentrancy attacks.
+
+send -> It works in a similar way as to transfer call and has a gas limit of 2300 gas as well. It returns the status as a boolean.
+
+call -> It is the recommended way of sending ETH to a smart contract. The empty argument triggers the fallback function of the receiving address.
+
+Call is the low-level method is the recommended way of sending ETH to a smart contract. One of its application fields is sending ether to fallback functions that require more than the stipend of gas.The empty argument triggers the fallback function of the receiving address. One can also trigger other functions defined in the contract.
+
+```
+(bool sent,memory data) = _to.call{value: msg.value}("");
+
+```
+
+using call, one can also trigger other functions defined in the contract and send a fixed amount of gas to execute the function. The transaction status is sent as a boolean and the return value is sent in the data variable.
+
+```
+(bool sent, bytes memory data) = _to.call{gas :10000, value: msg.value}("func_signature(uint256 args)");
+
+```
+
+This low-level method is the recommended way of sending ETH to a smart contract.One of its application fields is sending ether to fallback functions that require more than the stipend of gas.The empty argument triggers the fallback function of the receiving address. One can also trigger other functions defined in the contract.
+
+It offers us flexibility using by providing adjustable parameters to honest and informed users, but also for nefarious ones.
+
+```
+function transferEth(uint _amount,address payable receiverAdr) public payable {
+    bool success = address(receiverAdr).call.value(_amount).gas(35000)();
+    require(success,"Failed to send Eth!");
+}
+
+// using other parameters 
+
+function transferEth(uint _amount,address payable receiverAdr) public payable {
+    (bool success, bytes memory data) = receiverAdr.call{gas :10000, value: _amount}("other_func(uint256 args)");
+    require(success,"Failed to send Eth!");
+}
+```
+
+If a low-level call’s return value is not verified, execution may continue even if the function call throws an error. This may result in unexpected behaviour and sabotage the logic of the program.A failed call can even be caused by an attacker, who may be able to further exploit the application.
+
 
 ## (2) How do you write a gas-efficient for loop in Solidity?
 
@@ -413,7 +487,136 @@ The free memory pointer (located at offset 0x40) is the most crucial part of the
 Only public and abstract modifiers are allowed for methods in interfaces.
 ## (19) What is the difference between memory and calldata in a function argument?
 
-## (20) Describe the three types of storage gas costs.
+## (20A) What does Packing boolean values ​​into uint256 mean ?
+
+The bool type in solidity occupies 1 byte in memory, of which only one byte is used. If you need multiple boolean values, you can replace bool with uint32 or uint256 and bitwise arithmetic. So uint256 can store up to 256 boolean values.
+
+## (20B) Describe the three types of storage gas costs.
+
+- **Use Mappings Instead of Arrays**
+
+There are two data types to describe lists of data in Solidity, arrays and maps, and their syntax and structure are quite different, allowing each to serve a distinct purpose. While arrays are packable and iterable, mappings are less expensive.
+
+Except where iteration is required or data types can be packed, it is advised to use mappings to manage lists of data in order to conserve gas. This is beneficial for both memory and storage.
+
+An integer index can be used as a key in a mapping to control an ordered list. Another advantage of mappings is that you can access any value without having to iterate through an array as would otherwise be necessary. 
+
+- **Pack Your Variables**
+
+When processing data, the EVM adopts a novel approach: each contract has a storage location where data is kept permanently, as well as a persistent storage space where data can be read, written, and updated.
+
+There are 2,256 slots in the storage, each of which holds 32 bytes. Depending on their particular nature, the "state variables," or variables declared in a smart contract that are not within any function, will be stored in these slots. 
+
+Smaller-sized state variables (i.e. variables with less than 32 bytes in size), are saved as index values in the sequence in which they were defined, with 0 for position 1, 1 for position 2, and so on. If small values are stated sequentially, they will be stored in the same slot, including very small values like uint64.
+
+Consider the following example:
+
+### Before
+Small values are not stored sequentially and use unnecessary storage space.
+
+
+```
+contract MyContract {
+  uint128 c; 
+  uint256 b; 
+  uint128 a;
+}
+```
+
+### After
+
+Small values are stored sequentially and use less storage space because they are packed together.
+
+```
+contract Leggo {
+  uint128 a;  
+  uint128 c;  
+  uint256 b; 
+}
+```
+
+- **Free Up Unused Storage**
+
+Deleting your unused variables helps free up space and earns a gas refund. Deleting unused variables has the same effect as reassigning the value type with its default value, such as the integer's default value of 0, or the address zero for addresses.
+
+
+```
+//Using delete keyword
+delete myVariable;
+
+//Or assigning the value 0 if integer
+myInt = 0;
+```
+
+Mappings, however, are unaffected by deletion, as the keys of mappings may be arbitrary and are generally unknown. Therefore, if you delete a struct, all of its members that are not mappings will reset and also recurse into its members. However, individual keys and the values they relate to can be removed.
+
+- **Store Data in calldata Instead of Memory for Certain Function Parameters** 
+
+Instead of copying variables to memory, it is typically more cost-effective to load them immediately from calldata. If all you need to do is read data, you can conserve gas by saving the data in calldata.
+
+```
+// calldata
+function func2 (uint[] calldata nums) external {
+ for (uint i = 0; i < nums.length; ++i) {
+    ...
+ }
+}
+
+// Memory
+function func1 (uint[] memory nums) external {
+ for (uint i = 0; i < nums.length; ++i) {
+    ...
+ }
+}
+```
+Because the values in calldata cannot be changed while the function is being executed, if the variable needs to be updated when calling a function, use memory instead.
+
+- **Use immutable and constant**
+
+Immutable and constant are keywords that can be used on state variables to limit changes to their state. Constant variables cannot be changed after being compiled, whereas immutable variables can be set within the constructor. Constant variables can also be declared at the file level, such as in the example below:
+
+```
+contract MyContract {
+    uint256 constant b = 10;
+    uint256 immutable a;
+
+    constructor() {
+        a = 5;
+    } 
+}
+
+```
+
+- **Use the external Visibility Modifier**
+
+Use the external function visibility for gas optimization because the public visibility modifier is equivalent to using the external and internal visibility modifier, meaning both public and external can be called from outside of your contract, which requires more gas.
+
+Remember that of these two visibility modifiers, only the public modifier can be called from other functions inside of your contract.
+
+```
+function one() public view returns (string memory){
+    return message;
+}
+
+
+function two() external view returns  (string memory){
+    return message;
+}
+```
+
+**For more info, read these 2 on gas optimizations:**
+
+```
+- https://www.alchemy.com/overviews/solidity-gas-optimization 
+
+- https://prog.world/esoteric-gas-optimization-in-solidity/
+
+```
+
+
+## (20C) Why use indexed arguments in events?
+
+The event keyword allows you to declare events that can then be thrown during the execution of the contract, and these events will be available from the outside. Marking arguments with the keyword indexed allows you to search through them using filters, but not only – they start to cost less memory. The secret lies in the fact that indexed arguments are put on the stack, and ordinary arguments are put in memory. The cost of new memory goes up quadratically, and using indexed parameters will almost always save gas.
 
 ## (21) Why shouldn’t upgradeable contracts use the constructor?
 
@@ -559,6 +762,12 @@ Solidity does not support floating point values there are many reasons but the m
 
 ## (21) When selfdestruct is called, at what point is the Ether transferred? At what point is the smart contract's bytecode erased?
 
+When the selfdestruct function is called, the Ether transfer and the bytecode erasure happen simultaneously. This means that the Ether is transferred to the specified address at the same time that the bytecode of the smart contract is erased from the Ethereum blockchain.
+
+The reason for this is that the selfdestruct function is a message call. Message calls are executed by the Ethereum Virtual Machine (EVM) in a single step, so the entire function body is executed as a single atomic operation. This means that the Ether transfer and the bytecode erasure cannot happen at different times.
+
+It is important to note that the selfdestruct function can only transfer Ether. It cannot transfer other types of tokens, such as ERC-20 tokens or NFTs. Once the selfdestruct function is called, these tokens are lost forever.
+
 ## (22) Why did Solidity deprecate the "years" keyword?
 
 Try to use days instead, so now + 365 days. it has been deprecated because not every year is composed by 365 days.
@@ -571,9 +780,17 @@ In order to prevent over-reservation of the smart contract services, the gas cre
 
 ## (25) What does an int256 variable that stores -1 look like in hex?
 
+0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+
+i.e: 256 bits, each 4 bits are an Hex character - so 64 times f.
+
+Storage is the most expensive gas storage area in Solidity. It consists of slots of 256 bytes. Writing to storage slots that previously held 0 costs 20,000 gas. Writing to non-zero slots costs 5000 gas, 4 times less. Often all 256 bits of a slot are not needed, in which case it is possible to pack both 32 and 64 bit values ​​into a single storage slot. The first entry will cost the full 20,000, but subsequent entries will cost less.
+
 ## (26) What is the use of the signextend opcode?
 
 ## (27) Why do negative numbers in calldata cost more gas?
+
+Negative values are more expensive in calldata - Negative values have leading bytes of 0xfff while regular integers have zero leading bytes, and in calldata non-zero bytes cost more than zero bytes, so negative ints end up consuming more gas in calldata.
 
 ## (28) What is a zk-friendly hash function and how does it differ from a non-zk-friendly hash function?
 
