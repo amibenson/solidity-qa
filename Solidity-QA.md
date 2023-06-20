@@ -9,19 +9,19 @@ https://www.youtube.com/watch?v=Zf1tWIQ2vh8&t=21:00
 
 Questions are based on <a href="https://www.rareskills.io/post/solidity-interview-questions" target="_blank">this</a>
 
-# More questions
+# More questions from Dravee’s Incredible Journey 
+
+**(listen and edit later)**
 
 ## (1) What is Solidity Visual Editor for VSCode?
 
 https://marketplace.visualstudio.com/items?itemName=tintinweb.solidity-visual-auditor
 
-## (2) External calls - why marking them? What so bad about them?
+## (2) External calls - why marking them? What's so bad about them?
 
 https://www.youtube.com/watch?v=Zf1tWIQ2vh8&t=21:00
 
 ## (3) What is issue with ++ increment and -- decreament ?
-
-## (4) What are bot races in Code4Arena ?
 
 ## (4) What are bot races in Code4Arena ?
 
