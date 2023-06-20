@@ -42,9 +42,9 @@ Interfaces are expressed using the interface keyword. Here’s an example:
 pragma solidity ^0.4.24;
 
 interface token {
-function totalSupply() public view returns (uint256);
-function balanceOf(address who) public view returns (uint256);
-function transfer(address to, uint256 value) public returns (bool);
+    function totalSupply() public view returns (uint256);
+    function balanceOf(address who) public view returns (uint256);
+    function transfer(address to, uint256 value) public returns (bool);
 }
 ```
 
@@ -369,7 +369,7 @@ function transfer(address payable to, uint amount, bytes memory signature) exter
   address signer = hashData.toEthSignedMessageHash().recover(signature);
   require(signer == owner,"Signer is not owner");
   to.transfer(amount);
- }
+}
 ```
 
 Good: 
@@ -382,7 +382,7 @@ function transfer(address payable to, uint amount, bytes memory signature, uint 
   require(signer == owner,"Signer is not owner");
   currentNonce ++;
   to.transfer(amount);
- }
+}
 ```
 ## (15) What is gas griefing?
 
