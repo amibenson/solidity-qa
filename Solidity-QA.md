@@ -24,14 +24,92 @@ https://www.youtube.com/watch?v=Zf1tWIQ2vh8&t=21:00
 
 You can submit output of your bot in first hour.
 
-## (5) What is int and uint?
+## (5) What is an interface?
+
+Interfaces are similar to abstract contracts, but they are limited to what the contract’s ABI can represent. In other words, you could convert an ABI into an interface, or vice versa, and no information would be lost. According to the Solidity docs they have a few additional restrictions. For instance:
+
+- Interfaces cannot have any functions implemented
+- Interfaces cannot inherit other contracts or interfaces (contracts can however inherit - interfaces just as they would inherit other contracts)
+- Interfaces cannot define a constructor
+- Interfaces cannot define variables
+- Interfaces cannot define structs
+- Interfaces cannot define enums
+
+
+Interfaces are expressed using the interface keyword. Here’s an example:
+
+```
+pragma solidity ^0.4.24;
+
+interface token {
+function totalSupply() public view returns (uint256);
+function balanceOf(address who) public view returns (uint256);
+function transfer(address to, uint256 value) public returns (bool);
+}
+```
+
+## (6) What is an abstract contract?
+
+Contracts in Solidity are akin to classes in object-oriented languages. They include state variables that contain persistent data as well as functions that can manipulate the data in the state variables. Contracts are identified as abstract contracts when at least one of their functions lacks an implementation. As a result, they cannot be compiled. They can however be used as base contracts from which other contracts can inherit from.
+
+Along with improved extensibility, abstract contracts provide better self-documentation, instill patterns (like the Template method), and eliminate code duplication.
+
+Here’s an example:
+
+```
+pragma solidity ^0.4.24;
+
+contract Person {
+    function gender() public returns (bytes32);
+}
+
+contract Employee is Person {
+    function gender() public returns (bytes32) { return "female"; }
+}
+```
+
+## (7) When should you use an abstract contract instead of an interface?
+
+Abstract contracts are particularly useful when you want to instill patterns — like the template method — into the dapp you’re building. They give you the ability to implement most of a contract yet you can still include abstract functions in it in order to define and self-document the skeleton of your dapp. Doing so facilitates extensibility, removes code duplication, and reduces overhead when you have multiple contracts that need to communicate with one another.
+
+Additionally, **abstract contracts help with debugging**. Your compiler will report warnings and errors if it uncovers inconsistencies in your dapp’s patterns.
+
+## (8) What is the difference between override and virtual in Solidity?
+
+Virtual functions allow derived contracts to customize the functionality of a base contract, while override functions ensure that the derived contract has the same function signature as the virtual function it is overriding.
+
+## (9) When should you use an interface instead of an abstract contract?
+
+Interfaces are most useful when it comes to designing larger scale dapps prior to their comprehensive implementations. They make it easy to facilitate extensibility in your dapps without introducing added complexity. Many of their built in constraints (listed above) are what can ultimately be used to inform your decision as to whether or not to use an interface instead of an abstract contract.
+
+**Takeaways**
+When you’re building large, complex dapps, extensibility is key.
+Abstract contracts are base contracts in which at least one of their functions lacks an implementation.
+
+Other contracts can inherit from abstract contracts.
+
+Interfaces are similar to abstract contracts in that they help foster extensibility, however, they cannot include any implemented functions.
+
+Interfaces also cannot inherit from other contracts or interfaces, they cannot define constructors, they cannot define variables, they cannot define structs, and they cannot define enums.
+
+Abstract contracts help to instill coding patterns into your dapps. They also define and self-document the structure of your dapps.
+
+Interfaces are most useful in scenarios where your dapps require extensibility without introducing added complexity. Like abstract contracts they also help to remove code duplication and reduce overhead.
+
+Abstract contracts and interfaces are similar, however, abstract contracts are better suited for situations where some heavy lifting is required. Conversely, interfaces are used strictly as representations.
+
+## (10) What are Metamorphic contracts?
+
+contracts that can be redeployed with new code to the same address. It does so by deploying the metamorphic contract with fixed, non-deterministic initialization code via the CREATE2 opcode. This initalization code clones a given implementation contract and optionally initializes it in one operation.
+
+# Easy Questions
+
+## (0) What is int and uint?
 
 int is an abbreviation for int256, which has a range of -2 ** 255 to 2 ** 255 - 1.
 uint is an abbreviation for uint256, which has a range of 0 to 2 \*\*256 - 1.
 
 For example, uint8 has a range of 0 to 2 \*\* 8 -1.
-
-# Easy Questions
 
 ## (1) What is the difference between private, internal, public, and external functions?
 
@@ -315,14 +393,17 @@ A “Relayer” is an off-chain entity that pays for the gas of another user's t
 
 https://www.rareskills.io/post/solidity-gasleft
 
-## (16) ow would you design a game of rock-paper-scissors in a smart contract such that players cannot cheat?
+## (16) How would you design a game of rock-paper-scissors in a smart contract such that players cannot cheat?
 
+https://coinsbench.com/solidity-smart-contract-for-rock-paper-scissors-6420f43d534d
+TBD
 ## (17) What is the free memory pointer and where is it stored?
 
 The free memory pointer (located at offset 0x40) is the most crucial part of the EVM memory. It must be handled with care, especially in assembly/Yul.
 
 ## (18) What function modifiers are valid for interfaces?
 
+Only public and abstract modifiers are allowed for methods in interfaces.
 ## (19) What is the difference between memory and calldata in a function argument?
 
 ## (20) Describe the three types of storage gas costs.
