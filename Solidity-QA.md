@@ -260,7 +260,7 @@ The **Storage** is one of the four data locations a solidity smart contract has 
 
 ## (12) How does an AMM price assets?
 
-AMM use a mathematical formula to price assets based on liquidity. 
+AMM use a mathematical formula to price assets based on liquidity, aka demand. 
 
 Most AMMs use a **constant product** market maker model. The formula for this model is **X * Y = K** (K is a constant). 
 
@@ -272,7 +272,48 @@ A Solidity function with a payable modifier means that the function is able to p
 
 ## (14) What is a signature replay attack?
 
+In the blockchain, a signature replay attack is an attack whereby a previously executed valid transaction is fraudulently or maliciously repeated on the same blockchain or a different blockchain.
+
+One preventive technique is signing messages with a nonce and the address of the contract. Nonces, acronym for “number used only once”, would make each signed message unique. Also, by including the contract address in the signed message, the signature cannot be used to authenticate transactions for other contracts.
+
+Bad: 
+
+```
+function transfer(address payable to, uint amount, bytes memory signature) external {
+  bytes32 hashData = keccak256(abi.encodePacked(to, amount));
+  address signer = hashData.toEthSignedMessageHash().recover(signature);
+  require(signer == owner,"Signer is not owner");
+  to.transfer(amount);
+ }
+```
+
+Good: 
+
+```
+function transfer(address payable to, uint amount, bytes memory signature, uint nonce) external {
+  require(nonce == currentNonce ++,"Invalid nonce");
+  bytes32 hashData = keccak256(abi.encodePacked(to, amount,nonce));
+  address signer = hashData.toEthSignedMessageHash().recover(signature);
+  require(signer == owner,"Signer is not owner");
+  currentNonce ++;
+  to.transfer(amount);
+ }
+```
 ## (15) What is gas griefing?
+
+A gas griefing attack happens when a user sends the amount of gas required to execute the target smart contract, but not its sub calls.
+
+I'm really not very familiar with griefing attacks but based on the definition I'd say they can be profitable for the attacker. Not directly but indirectly.
+
+My not-too-scientific analysis is based on the example given in the linked answer's references: https://consensys.github.io/smart-contract-best-practices/known_attacks/#insufficient-gas-griefing
+
+This is not a perfect example but at least something: imagine a contract which is used for finding out whether anyone disagrees or agrees with some idea. So a maximum of one "yes" and a maximum of one "no" is enough for the contract. Now for some reason it needs to be called through such a Relayer contract. If the attacker performs a griefing attack on the "yes" or the "no" answer the answer doesn't get stored but nobody else can give that answer anymore as the Relayer has already blocked that answer. That way the attacker knows nobody can give an answer he doesn't like.
+
+We might say that it's a type of "Lose-Lose game". That is, if I cannot win, I do not let nobody else wins.
+
+A “Relayer” is an off-chain entity that pays for the gas of another user's transactions and the transaction is sent to a “Forwarder” contract.
+
+https://www.rareskills.io/post/solidity-gasleft
 
 ## (16) ow would you design a game of rock-paper-scissors in a smart contract such that players cannot cheat?
 
