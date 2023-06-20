@@ -1,5 +1,7 @@
 #
 
+https://www.youtube.com/watch?v=Zf1tWIQ2vh8
+
 https://www.youtube.com/watch?v=Zf1tWIQ2vh8&t=21:00
 
 Questions are based on [this](https://www.rareskills.io/post/solidity-interview-questions){:target="\_blank" rel="noopener"}
@@ -238,3 +240,135 @@ The free memory pointer (located at offset 0x40) is the most crucial part of the
 Solidity does not support floating point values there are many reasons but the most important is that solidity deals with real money and as we all know while division we lose some minor point values when we convert the value back to an integer due to that solidity does not support it.
 
 # High Questions
+
+## (1) How does fixed point arithmetic represent numbers?
+
+## (2) What is an ERC20 approval frontrunning attack?
+
+## (3) What opcode accomplishes address(this).balance?
+
+## (4) How many arguments can a solidity event have?
+
+## (5) What is an anonymous Solidity event?
+
+## (6) Under what circumstances can a function receive a mapping as an argument?
+
+## (7) What is an inflation attack in ERC4626
+
+## (8) How many arguments can a solidity function have?
+
+## (9) How many storage slots does this use? uint64[] x = [1,2,3,4,5]? Does it differ from memory?
+
+## (10) Prior to the Shanghai upgrade, under what circumstances is returndatasize() more efficient than push zero?
+
+## (11) Why does the compiler insert the INVALID op code?
+
+## (12) What is the difference between how a custom error and a require with error string is encoded at the EVM level?
+
+## (13) What is the kink parameter in the Compound DeFi formula?
+
+## (14) How can the name of a function affect its gas cost, if at all?
+
+## (15) What is a common vulnerability with ecrecover?
+
+## (16) What is the difference between an optimistic rollup and a zk-rollup?
+
+## (17) How does EIP1967 pick the storage slots, how many are there, and what do they represent?
+
+## (18) How much is one Sazbo of ether?
+
+## (19) Under what circumstances would a smart contract that works on Etheruem not work on Polygon or Optimism? (Assume no dependencies on external contracts)
+
+## (20) How can a smart contract change its bytecode without changing its address?
+
+## (21) What is the danger of putting msg.value inside of a loop?
+
+## (22) Describe the calldata of a function that takes a dynamic length array of uint128 when uint128[1,2,3,4] is passed as an argument
+
+## (23) Why is strict inequality comparisons more gas efficient than ≤ or ≥? What extra opcode(s) are added?
+
+## (24) What is the relationship between variable scope and stack depth?
+
+## (25) What is an access list transaction?
+
+## (26) How can you halt an execution with the mload opcode?
+
+## (27) Why is it necessary to take a snapshot of balances before conducting a governance vote?
+
+## (28) How can a transaction be executed without a user paying for gas?
+
+## (29) In solidity, without assembly, how do you get the function selector of the calldata?
+
+## (30) How is an Ethereum address derived?
+
+## (31) What is the metaproxy standard?
+
+## (32) Under what circumstances do vanity addresses (leading zero addresses) save gas?
+
+## (33) Why do a significant number of contract bytecodes begin with 6080604052? What does that bytecode sequence do?
+
+## (34) How does Uniswap V3 determine the boundaries of liquidity intervals?
+
+# Advanced Questions
+
+## (1) What addresses to the ethereum precompiles live at?
+
+## (2) How does Solidity manage the function selectors when there are more than 4 functions?
+
+## (3) How does ABI encoding vary between calldata and memory, if at all?
+
+## (4) What is the difference between how a uint64 and uint256 are abi-encoded in calldata?
+
+## (5) What is read-only reentrancy?
+
+## (6) If you deploy an empty Solidity contract, what bytecode will be present on the blockchain, if any?
+
+## (7) How does the EVM price memory usage?
+
+## (8) What is stored in the metadata section of a smart contract?
+
+## (9) What is the uncle-block attack from an MEV perspective?
+
+## (10) How do you conduct a signature malleability attack?
+
+## (11) Under what circumstances do addresses with leading zeros save gas and why?
+
+## (12) What is the difference between payable(msg.sender).call{value: value}(””) and msg.sender.call{value: value}(””)?
+
+## (13) How many storage slots does a string take up?
+
+## (14) How does the --via-ir functionality in the Solidity compiler work?
+
+## (15) Are function modifiers called from right to left or left to right, or is it non-deterministic?
+
+## (16) If you do a delegatecall to a contract and the opcode CODESIZE executes, which contract size will be returned?
+
+## (17) Why is it important to ECDSA sign a hash rather than an arbitrary bytes32?
+
+## (18) Describe how symbolic manipulation testing works.
+
+## (19) What is the most efficient way to copy regions of memory?
+
+## (20) How can you validate on-chain that another smart contract emitted an event, without using an oracle?
+
+## (21) When selfdestruct is called, at what point is the Ether transferred? At what point is the smart contract's bytecode erased?
+
+## (22) Why did Solidity deprecate the "years" keyword?
+
+Try to use days instead, so now + 365 days. it has been deprecated because not every year is composed by 365 days.
+
+## (23) What does the verbatim keyword do, and where can it be used?
+
+## (24) How much gas can be forwarded in a call to another smart contract?
+
+In order to prevent over-reservation of the smart contract services, the gas credited back relative to the reservation will be limited to at most 20% of the reservation amount. From a different perspective, the amount of gas charged to a user based on the reservation will be a minimum of 80% of the reservation.
+
+## (25) What does an int256 variable that stores -1 look like in hex?
+
+## (26) What is the use of the signextend opcode?
+
+## (27) Why do negative numbers in calldata cost more gas?
+
+## (28) What is a zk-friendly hash function and how does it differ from a non-zk-friendly hash function?
+
+## (29) What is a nullifier in the context of zero knowledge, and what is it used for?
