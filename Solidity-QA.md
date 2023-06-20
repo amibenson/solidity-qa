@@ -115,13 +115,15 @@ For example, uint8 has a range of 0 to 2 \*\* 8 -1.
 
 Access types:
 
-public - can be used when contract was deployed, can be used in inherited contract
+**public** - can be used when contract was deployed, can be used in inherited contract
 
-external can be used when contract was deployed , can NOT be used in inherited contract
+**external** can be used when contract was deployed, can NOT be used in inherited contract
 
-internal - can NOT be used when contract was deployed , can be used in inherited contract
+**internal** - can NOT be used when contract was deployed, can be used in inherited contract
 
-private - can NOT be used when contract was deployed, can NOT be used in inherited contract
+**private** - can NOT be used when contract was deployed, can NOT be used in inherited contract
+
+**NOTE:** You cannot call a private or internal function in another contract.
 
 Private functions can only be called from inside the contract, even the inherited contracts can't call them ?????. Public functions can be called from anywhere. external :External functions are part of the contract interface, which means they can be called from other contracts and via transactions.
 
