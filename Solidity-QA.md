@@ -607,9 +607,10 @@ function two() external view returns  (string memory){
 **For more info, read these 2 on gas optimizations:**
 
 ```
-- https://www.alchemy.com/overviews/solidity-gas-optimization 
+- <a href="https://www.alchemy.com/overviews/solidity-gas-optimization" target="_blank">https://www.alchemy.com/overviews/solidity-gas-optimization</a>
+ 
 
-- https://prog.world/esoteric-gas-optimization-in-solidity/
+- <a href="https://prog.world/esoteric-gas-optimization-in-solidity/" target="_blank">https://prog.world/esoteric-gas-optimization-in-solidity/</a>
 
 ```
 
