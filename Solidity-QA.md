@@ -260,7 +260,15 @@ The **Storage** is one of the four data locations a solidity smart contract has 
 
 ## (12) How does an AMM price assets?
 
+AMM use a mathematical formula to price assets based on liquidity. 
+
+Most AMMs use a **constant product** market maker model. The formula for this model is **X * Y = K** (K is a constant). 
+
+A **constant sum AMM** can be considered a range-bound AMM with a very narrow range (good for stables) and uses the formula **X + Y = K**.
+
 ## (13) What is the effect on gas of making a function payable?
+
+A Solidity function with a payable modifier means that the function is able to process transactions with more than or equal to zero Ether. TBD
 
 ## (14) What is a signature replay attack?
 
