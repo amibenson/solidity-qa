@@ -4,7 +4,7 @@ https://www.youtube.com/watch?v=Zf1tWIQ2vh8
 
 https://www.youtube.com/watch?v=Zf1tWIQ2vh8&t=21:00
 
-Questions are based on [this](https://www.rareskills.io/post/solidity-interview-questions){:target="\_blank" rel="noopener"}
+Questions are based on <a href="https://www.rareskills.io/post/solidity-interview-questions" target="_blank">this</a>
 
 # More questions
 
