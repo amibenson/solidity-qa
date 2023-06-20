@@ -1,6 +1,9 @@
 #
 
-https://www.youtube.com/watch?v=Zf1tWIQ2vh8
+
+<a href="https://www.youtube.com/watch?v=Zf1tWIQ2vh8" target="_blank">From Beginner to Web3 Security Pro: Dravee’s Incredible Journey</a>
+
+
 
 https://www.youtube.com/watch?v=Zf1tWIQ2vh8&t=21:00
 
