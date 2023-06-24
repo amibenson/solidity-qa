@@ -3,8 +3,6 @@
 
 <a href="https://www.youtube.com/watch?v=Zf1tWIQ2vh8" target="_blank">From Beginner to Web3 Security Pro: Dravee’s Incredible Journey</a>
 
-
-
 https://www.youtube.com/watch?v=Zf1tWIQ2vh8&t=21:00
 
 Questions are based on <a href="https://www.rareskills.io/post/solidity-interview-questions" target="_blank">this</a>
@@ -83,6 +81,69 @@ contract Employee is Person {
 }
 ```
 
+An instance of an abstract cannot be created. Abstract contracts are used as base contracts so that the child contract can inherit and utilize its functions. The abstract contract defines the structure of the contract and any derived contract inherited from it should provide an implementation for the incomplete functions, and if the derived contract is also not implementing the incomplete functions then that derived contract will also be marked as abstract. An abstract contract is declared using the abstract keyword. 
+
+Example of an abstract contract:
+
+```
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.17;
+
+/// @title A contract for describes the properties of Abstract Contract
+/// @author Jitendra Kumar
+/// @notice For now, this contract just show the functionalities of Abstract Contract
+abstract contract AbstractContract {
+	// Declaring functions
+	function getStr(
+	string memory _strIn) public view virtual returns(
+	string memory);
+	function setValue(uint _in1, uint _in2) public virtual;
+	function add() public virtual returns(uint);
+}
+
+// child contract 'DerivedContract' inheriting an abstract parent contract 'AbstractContract'
+contract DerivedContract is AbstractContract{
+
+	// Declaring private variables
+	uint private num1;
+	uint private num2;
+
+	// Defining functions inherited from abstract parent contract
+	function getStr(
+	string memory _strIn) public pure override returns(
+	string memory){
+		return _strIn;
+	}
+	
+	function setValue(
+	uint _in1, uint _in2) public override{
+		num1 = _in1;
+		num2 = _in2;
+	}
+	function add() public view override returns(uint){
+		return (num2 + num1);
+	}
+}
+
+// Caller contract
+contract Call{
+	// Creating an instance of an abstract contract
+	AbstractContract abs;
+	
+	// Creating an object of child contract
+	constructor(){
+		abs = new DerivedContract();
+	}
+
+	// Calling functions inherited from abstract contract
+	function getValues(
+	) public returns (string memory,uint){
+		abs.setValue(10, 16);
+		return (abs.getStr("GeeksForGeeks"),abs.add());
+	}
+}
+```
+
 ## (7) When should you use an abstract contract instead of an interface?
 
 Abstract contracts are particularly useful when you want to instill patterns — like the template method — into the dapp you’re building. They give you the ability to implement most of a contract yet you can still include abstract functions in it in order to define and self-document the skeleton of your dapp. Doing so facilitates extensibility, removes code duplication, and reduces overhead when you have multiple contracts that need to communicate with one another.
@@ -96,6 +157,19 @@ Virtual functions allow derived contracts to customize the functionality of a ba
 ## (9) When should you use an interface instead of an abstract contract?
 
 Interfaces are most useful when it comes to designing larger scale dapps prior to their comprehensive implementations. They make it easy to facilitate extensibility in your dapps without introducing added complexity. Many of their built in constraints (listed above) are what can ultimately be used to inform your decision as to whether or not to use an interface instead of an abstract contract.
+
+## (10) Not Relevant to EVM, but: What is "Proof-of-work"?
+
+The purpose in Proof-of-work is to **make it verifiable without significant effort** that it **took significant effort to create a piece of work**.
+
+Real life is full of work that fulfills these criteria, one of the more extreme ones being mechanical clocks. Every person in the world can verify at a glance that this thing on my wall is, in fact, a working mechanical clock. Clocks are complicated, so in this example it takes an average person only a few seconds to verify that an immense amount of work went into this item.
+
+Blockchains are thus designed to be decentralized. How this works is that a bunch of machines collectively play the clerk role in a democratic way. These are machines from all over the internet, from all kinds of people. There's no entry fee or admission, you connect your machine and you're in. This guarantees that there's no single point of failure (which would be the case if a single entity, for example a company, was managing the machines). As long as some machines stay connected, the blockchain is alive. It also guarantees independance - it's a collective effort, thus no single entity has control over the blockchain.
+
+However, this extremely open approach presents another challenge for the blockchain: If there are 500 machines managing a blockchain, any malicious party can just connect 501 extremely weak machines for cheap. This would give them the defacto majority and full control over the blockchain's management. And finally, to prevent that from happening, we can come back to proof of work.
+
+And why is this important again? Remember, I wanted to spin up 501 extremely weak machines to take over our example blockchain. Now I have to spin up 501 machines that have comparable computational power to a modern computer. That's expensive as hell! So in the case of blockchains, the point of PoW is to make it if not impossible, then at least unfeasable for a single entity to overtake the collective management system.
+
 
 **Takeaways**
 When you’re building large, complex dapps, extensibility is key.
@@ -119,8 +193,23 @@ contracts that can be redeployed with new code to the same address. It does so b
 
 ## (11) Why is delegateCall useful for or what it enables?
 
-Using libraries
+Here are some of the most common use cases for the delegateCall opcode:
 
+**Proxy Contracts:** delegateCall is often used in proxy contracts, which forward function calls to an implementation contract. By using delegateCall, the implementation contract can be upgraded without changing the address of the proxy contract, since the proxy contract's storage and state will remain unchanged.
+
+**Modular Contracts:** delegateCall can be used to create modular contracts. In this design, each module is a separate contract that can be upgraded independently. The modules can use delegateCall to interact with each other and with the main contract, allowing for greater flexibility and modularity.
+
+**Gas Efficiency:** delegateCall can be used to reduce gas costs. It allows multiple contracts to share the same code without having to copy it into each contract. This can be particularly useful for large contracts that would otherwise exceed the gas limit.
+Library Contracts: delegateCall can be used to implement library contracts that contain reusable code that can be called from multiple contracts. The library contract's functions are executed in the context of the calling contract's caller, allowing the library code to access the caller's storage.
+
+**Cross-Chain Communication:** The delegateCall function can be used to enable cross-chain communication between different blockchain networks. By using delegateCall to interact with a bridge contract on another blockchain, contracts on one chain can call functions on the other chain, allowing for interoperability between different blockchain networks.
+
+## (12) Give examples of Known attacks?
+
+Consensys <a href="https://consensys.github.io/smart-contract-best-practices/attacks/" target="_blank">https://consensys.github.io/smart-contract-best-practices/attacks/</a>
+
+
+## (13) Explain Calldata ...
 # Easy Questions
 
 ## (0) What is int and uint?
@@ -142,15 +231,17 @@ Access types:
 
 **private** - can NOT be used when contract was deployed, can NOT be used in inherited contract
 
-**NOTE:** You cannot call a private or internal function in another contract.
+**NOTE:** You cannot call a private or internal function in **another contract**.
 
-Private functions can only be called from inside the contract, even the inherited contracts can't call them. Public functions can be called from anywhere. external :External functions are part of the contract interface, which means they can be called from other contracts and via transactions.
+Private functions can only be called from inside the contract, even the inherited contracts can't call them. Public functions can be called from anywhere. 
+
+external: External functions are part of the contract interface, which means they can be called from **other contracts** and via transactions.
 
 In a nutshell, public and external differs in terms of gas usage. **Public functions use more gas than External functions** when used with large arrays of data. This is due to the fact that **Solidity copies arguments to memory on a public function** while **external read from calldata** which is cheaper than memory allocation.
 
 State variables cannot be marked as external. 
 
-public − Public functions/ Variables can be used both externally and internally. 
+public − Public Functions/Variables can be used both externally and internally. 
 For public state variable, Solidity automatically creates a getter function.
 
 internal − Internal functions/Variables can only be used internally or by derived contracts.
@@ -197,13 +288,17 @@ The tx.origin variable can be manipulated in certain scenarios where malicious a
 
 ## (12) What hash function does Ethereum primarily use?
 
-Keccak256 can be used in many different ways in Solidity, depending on your needs. Some common use cases include:
+Keccak256 can be used in many different ways in Solidity, depending on your needs. 
 
-#### Generating random numbers: You can use Keccak256 to generate random numbers by hashing a seed value with a block timestamp or block hash.
+Keccak256 outputs a 256-bit hash value, which makes it resistant to brute-force attacks.
+ 
+ Some common use cases include:
 
-#### Verifying digital signatures: You can use Keccak256 to verify digital signatures by hashing the signed message and comparing it to the expected hash value.
+- **Generating random numbers**: You can use Keccak256 to generate random numbers by hashing a seed value with a block timestamp or block hash.
 
-#### Creating unique identifiers: You can use Keccak256 to create unique identifiers for entities in your smart contract, such as tokens or accounts.
+- **Verifying digital signatures**: You can use Keccak256 to verify digital signatures by hashing the signed message and comparing it to the expected hash value.
+
+- **Creating unique identifiers**: You can use Keccak256 to create unique identifiers for entities in your smart contract, such as tokens or accounts.
 
 ## (13) How much is 1 gwei of Ether?
 
@@ -274,15 +369,19 @@ Reentrancy is a programming technique in which a function execution is interrupt
 
 ## (21) As of the Shanghai upgrade, what is the gas limit per block?
 
-## (22) What prevents infinite loops from running forever?
+## (22) What prevents infinite loops from running forever in view functions?
 
-When view function is executed on-chain, i.e. within mined transaction, it consumes gas, and this protects node from infinite loop
+When view function is executed on-chain, i.e. within mined transaction, it consumes gas, and this protects node from infinite loops. 
 
 ## (23) What is the difference between tx.origin and msg.sender?
 
 The difference between the two is fairly simple (as of early 2023); tx. origin is the address of the EOA (externally ownder account) that originated the transaction, and msg. sender is the address of whatever called the currently executing smart contract (could be an EOA or a smart contract).
 
 ## (24) How do you send Ether to a contract that does not have payable functions, or a receive or fallback?
+
+TBD...
+
+selfdestruction. Another contract self destructs (by using the selfdestruct functionality) and sends its remaining Ether to your contract.
 
 a contract just with a payable function can receive ether，but why does the contract need to be add a receive() function to receive ether?
 
@@ -815,3 +914,10 @@ Negative values are more expensive in calldata - Negative values have leading by
 ## (28) What is a zk-friendly hash function and how does it differ from a non-zk-friendly hash function?
 
 ## (29) What is a nullifier in the context of zero knowledge, and what is it used for?
+
+
+# More resources:
+
+## Memory vs Storage & When to Use Them
+
+https://medium.com/coinmonks/ethereum-solidity-memory-vs-storage-which-to-use-in-local-functions-72b593c3703a#:~:text=storage%20cannot%20be%20newly%20created,contract%20storage%20(state%20variable)
