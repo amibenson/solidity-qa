@@ -223,9 +223,13 @@ abstract contract ReentrancyGuard ...
 
 Flagging these contracts as abstract is one way to signal that these contracts are not meant to be used on their own, but rather as a building block by extending from them.
 
+## (14) How to you call a function in a contract A and pass ether to it?
 
+```
+address.function{ value: amount }(arg1, arg2, arg3)
+```
 
-## (14) Explain Calldata ...
+## (15) Explain Calldata ...
 # Easy Questions
 
 ## (0) What is int and uint?
