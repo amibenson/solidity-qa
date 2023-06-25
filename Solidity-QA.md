@@ -291,9 +291,10 @@ The solution Solidity provides to the Diamond Problem is by using reverse C3 lin
 
 Although it is allowed, it is best practice to avoid unused variables. Unused variables can lead to a few different problems:
 
-Increase in computations (unnecessary gas consumption)
-Indication of bugs or malformed data structures
-Decreased code readability
+- Increase in computations (unnecessary gas consumption)
+- Indication of bugs or malformed data structures
+- Decreased code readability
+
 It is highly recommended to remove all unused variables from a code base.
 
 
