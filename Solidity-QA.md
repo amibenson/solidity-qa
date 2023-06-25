@@ -271,9 +271,15 @@ Properties of Calldata:
 
 - Signature Malleability
 
+- Delegatecall to Untrusted Callee
+
 - Weak Sources of Randomness from Chain Attributes
 
 - Missing Protection against Signature Replay Attacks
+
+- <a href="https://kadenzipfel.github.io/smart-contract-vulnerabilities/vulnerabilities/incorrect-inheritance-order.html">Incorrect Inheritance Order</a>
+
+The solution Solidity provides to the Diamond Problem is by using reverse C3 linearization. This means that it will linearize the inheritance from right to left, so the order of inheritance matters. It is suggested to start with more general contracts and end with more specific contracts to avoid problems.
 
 - Unencrypted Private Data On-Chain
 
