@@ -31,7 +31,10 @@ https://marketplace.visualstudio.com/items?itemName=tintinweb.solidity-visual-au
 
 https://www.youtube.com/watch?v=Zf1tWIQ2vh8&t=21:00
 
-## (3) What is issue with ++ increment and -- decreament ?
+## (3) What is more gas efficient: pre increment ++i or post increment i++ ?
+
+The pre-increment operation (++i) boils down to incrementing the value at i, then returning the value (2 operations). The post-increment operation (i++) boils down to saving the original value of i, incrementing it and saving that to a temporary place in memory, and then returning the original value; only after that value is returned is the value of i actually updated (4 operations). As you can see, the <b>pre-increment operation uses less opcodes and is thus more gas efficient</b>.
+
 
 ## (4) What are bot races in Code4Arena ?
 
