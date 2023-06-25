@@ -230,6 +230,33 @@ address.function{ value: amount }(arg1, arg2, arg3)
 ```
 
 ## (15) Explain Calldata ...
+
+The calldata is a special data location in the EVM. It refers to the raw hex bytes sent along any message call transaction between two addresses. For the EVM, any data contained in the calldata was given as input by an address (whether an EOA or a smart contract) to perform an external call.
+
+When calling a contract (either from an EOA or another contract), the calldata is the data location containing the initial input parameters (= arguments) of the function being called. This is where the parameters of public or external functions are stored.
+
+The calldata is a data location very specific to any EVM-based blockchain, with some layout specificity:
+
+the first 4 bytes correspond to the selector of the function signature.
+the remaining bytes correspond to the input parameters of the function. Each input argument is always 32 bytes long. If its type is smaller than 32 bytes, the argument is padded.
+
+Note: input arguments are padded either on the right or the left depending on their type (for example, uintN or address are padded on the left, while bytesN are padded on the right).
+
+```
+
+“One good way to think about the difference (between calldata and memory) and how they should be used is that calldata is allocated by the caller, while memory is allocated by the callee.” — Tjaden Hess on Ethereum Stack Exchange
+
+```
+
+Properties of Calldata:
+
+- Non-modifiable (Read-only) = you cannot modify or change the data in the calldata. It cannot be overwritten.
+
+- Almost unlimited in size = virtually unlimited in size, without a fixed boundary.
+- Very cheap and gas-efficient = reading + allocating bytes in the calldata is very cheap and gas efficient.
+- No n-persistent (after the transaction has completed)
+- Specific to transactions and contract calls.
+
 # Easy Questions
 
 ## (0) What is int and uint?
