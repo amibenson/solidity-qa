@@ -209,7 +209,23 @@ Library Contracts: delegateCall can be used to implement library contracts that 
 Consensys <a href="https://consensys.github.io/smart-contract-best-practices/attacks/" target="_blank">https://consensys.github.io/smart-contract-best-practices/attacks/</a>
 
 
-## (13) Explain Calldata ...
+## (13) Why all of OpenZeppelin, for example, contracts that are imported by dApps are abstract, see below, although some of them implement all their functions?
+
+```
+abstract contract Initializable ...
+
+```
+
+```
+abstract contract ReentrancyGuard ...
+
+```
+
+Flagging these contracts as abstract is one way to signal that these contracts are not meant to be used on their own, but rather as a building block by extending from them.
+
+
+
+## (14) Explain Calldata ...
 # Easy Questions
 
 ## (0) What is int and uint?
@@ -245,6 +261,8 @@ public − Public Functions/Variables can be used both externally and internally
 For public state variable, Solidity automatically creates a getter function.
 
 internal − Internal functions/Variables can only be used internally or by derived contracts.
+
+<b>Tip:</b> State variables without a specified visibility are internal by default.
 
 ## (2) Approximately, how large can a smart contract be?
 
