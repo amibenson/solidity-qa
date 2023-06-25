@@ -260,6 +260,28 @@ Properties of Calldata:
 - No n-persistent (after the transaction has completed)
 - Specific to transactions and contract calls.
 
+
+## (16) Give examples of some Smart Contract Vulnerabilities.
+
+- Authorization Through tx.origin
+
+- Floating Pragma
+
+- <a href="https://kadenzipfel.github.io/smart-contract-vulnerabilities/vulnerabilities/unsafe-low-level-call.html">Unsafe Low-Level Call</a>
+
+- Signature Malleability
+
+- Weak Sources of Randomness from Chain Attributes
+
+- Missing Protection against Signature Replay Attacks
+
+- Unencrypted Private Data On-Chain
+
+- Asserting contract from Code Size
+
+- Insufficient Access Control
+
+More: <a hre="https://kadenzipfel.github.io/smart-contract-vulnerabilities/">https://kadenzipfel.github.io/smart-contract-vulnerabilities/</a>
 # Easy Questions
 
 ## (0) What is int and uint?
