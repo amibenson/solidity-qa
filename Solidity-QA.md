@@ -464,6 +464,9 @@ To calculate the gas fee for this transaction, you simply multiply the gas limit
 
 2,100,000 gwei = 0.0021 ETH
 ```
+<b>
+NOTE: Gwei is defined as one-billionth (one Nano) of an Ether. So 1 Gwei equals 0.000000001 or 10-9 ETH.
+</b>
 
 So the gas fee (aka miner fee) for this transaction is 0.0021 ETH. Keep in mind that more complex transactions, such as executing a smart contract, may incur a higher gas fee than doing something simpler, such as sending ETH from one wallet to another. It's also important to ensure that you're paying enough in gas for the transaction to be processed promptly and successfully.
 
