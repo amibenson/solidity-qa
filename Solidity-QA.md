@@ -725,16 +725,16 @@ The commit-reveal scheme is a technique used in blockchain-based applications to
 
 During the commit phase, users submit a commitment that contains the hash of their answer along with a random seed value. The smart contract stores this commitment on the blockchain. Later, during the reveal phase, the user reveals their answer and the seed value. The smart contract then checks that the revealed answer and the hash match, and that the seed value is the same as the one submitted earlier. If everything checks out, the contract accepts the answer as valid and rewards the user accordingly.
 
-The commit-reveal scheme is essential in blockchain-based applications as it ensures that users cannot change their answers once they have submitted them, and prevents others from knowing the answer before the deadline. It also ensures that the process is fair and transparent, providing a secure and reliable way to conduct various activities on a blockchain-based platform.
+<b>The commit-reveal scheme is essential in blockchain-based applications as it ensures that users cannot change their answers once they have submitted them, and prevents others from knowing the answer before the deadline</b>. It also <b>ensures</b> that the <b>process is fair and transparent</b>, providing a secure and reliable way to conduct various activities on a blockchain-based platform.
 
 Why should I use it ?
 Not using the commit-reveal scheme in a blockchain-based application can undermine its fairness and transparency and leave the system vulnerable to various attacks such as :
 
-Front-running attacks: In the absence of the commit-reveal scheme, an attacker can potentially front-run the transaction of a user and submit a transaction with a higher gas price to get their transaction processed first. This can give the attacker an unfair advantage in activities such as auctions or lotteries.
+<b>Front-running attacks: In the absence of the commit-reveal scheme, an attacker can potentially front-run the transaction of a user and submit a transaction with a higher gas price</b> to get their transaction processed first. This can give the attacker an unfair advantage in activities such as auctions or lotteries.
 
-Replay attacks: In a blockchain-based application, a replay attack can happen when a user’s original transaction is replayed in a different context or environment. Without the commit-reveal scheme, an attacker can potentially replay a user’s transaction and manipulate the results in their favour.
+Replay attacks: In a blockchain-based application, a replay attack can happen when a user’s original transaction is replayed in a different context or environment. <b>Without the commit-reveal scheme, an attacker can potentially replay a user’s transaction and manipulate the results in their favour</b>.
 
-Answer substitution attacks: In activities such as quizzes or voting, an attacker can potentially substitute the user’s answer with their own answer in the absence of the commit-reveal scheme. This can lead to an unfair advantage for the attacker and undermine the integrity of the activity.
+<b>Answer substitution attacks: In activities such as quizzes or voting, an attacker can potentially substitute the user’s answer with their own answer in the absence of the commit-reveal scheme</b>. This can lead to an unfair advantage for the attacker and undermine the integrity of the activity.
 
 <a id="sybil-attacks-in-commit-reveal-context">
 Sybil attacks: In a blockchain-based application, a Sybil attack happens when an attacker creates multiple identities or accounts to manipulate the system’s results. Without the commit-reveal scheme, an attacker can potentially create multiple accounts and submit multiple answers, skewing the results in their favour.
