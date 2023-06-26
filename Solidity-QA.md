@@ -1,15 +1,14 @@
-#
+# Solidity Questions & Answers
 
-
-<a href="https://www.youtube.com/watch?v=Zf1tWIQ2vh8" target="_blank">From Beginner to Web3 Security Pro: Dravee’s Incredible Journey</a>
-
-https://www.youtube.com/watch?v=Zf1tWIQ2vh8&t=21:00
-
-Questions are based on <a href="https://www.rareskills.io/post/solidity-interview-questions" target="_blank">this</a>
+Questions are based on <a href="https://www.rareskills.io/post/solidity-interview-questions" target="_blank">Solidity Interview Questions</a>
 
 # More questions from Dravee’s Incredible Journey 
 
 **(listen and edit later)**
+
+<a href="https://www.youtube.com/watch?v=Zf1tWIQ2vh8" target="_blank">From Beginner to Web3 Security Pro: Dravee’s Incredible Journey</a>
+
+https://www.youtube.com/watch?v=Zf1tWIQ2vh8&t=21:00
 
 
 ## (0) What are libraries in Solidity? Give example of some popular libraries.
