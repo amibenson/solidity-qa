@@ -721,6 +721,14 @@ A front-running attack occurs when a malicious user observes a transaction after
 
 ## (8) What is a commit-reveal scheme and when would you use it?
 
+Short answer or rational:
+
+```
+
+Hiding Actions and Generating Random Numbers The Ethereum blockchain is public. Since all transactions are public we have to use extra tricks to keep some things temporarily hidden. Let’s say we need input like an answer to a quiz or a move in a game from a group of players. We don’t want these players to be able to just watch the blockchain for their competitors’ answers. What we’ll do is have everyone hash their answer and submit that first (the commit). Next, everyone will submit their real answer (the reveal) and we can prove on-chain that it hashes to the committed value.
+
+```
+
 The commit-reveal scheme is a technique used in blockchain-based applications to ensure the fairness, transparency, and security of various activities such as voting, auctions, lotteries, quizzes, and gift exchanges. The scheme involves two steps: commit and reveal.
 
 During the commit phase, users submit a commitment that contains the hash of their answer along with a random seed value. The smart contract stores this commitment on the blockchain. Later, during the reveal phase, the user reveals their answer and the seed value. The smart contract then checks that the revealed answer and the hash match, and that the seed value is the same as the one submitted earlier. If everything checks out, the contract accepts the answer as valid and rewards the user accordingly.
