@@ -2,7 +2,7 @@
 
 Questions are based on <a href="https://www.rareskills.io/post/solidity-interview-questions" target="_blank">Solidity Interview Questions</a>
 
-# More questions from Dravee’s Incredible Journey 
+## More questions from Dravee’s Incredible Journey 
 
 **(listen and edit later)**
 
@@ -48,9 +48,9 @@ However, libraries can still implement some data type:
 
 <b>Here are two scenarios of library deployments:</b>
 
-Embedded Library: If a smart contract is consuming a library which have only internal functions, then the EVM simply embeds library into the contract. Instead of using delegate call to call a function, it simply uses JUMP statement(normal method call). There is no need to separately deploy library in this scenario.
+<b>Embedded Library:</b> If a smart contract is consuming a library which have only internal functions, then the EVM simply embeds library into the contract. Instead of using delegate call to call a function, it simply uses JUMP statement(normal method call). There is no need to separately deploy library in this scenario.
 
-Linked Library : On the flip side, if a library contain public or external functions then library needs to be deployed. The deployment of library will generate a unique address in the blockchain. This address needs to be linked with calling contract.
+<b>Linked Library:</b> On the flip side, if a library contain public or external functions then library needs to be deployed. The deployment of library will generate a unique address in the blockchain. This address needs to be linked with calling contract.
 
 Using a library:
 
