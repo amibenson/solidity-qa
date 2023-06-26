@@ -725,7 +725,12 @@ Short answer or rational:
 
 ```
 
-Hiding Actions and Generating Random Numbers The Ethereum blockchain is public. Since all transactions are public we have to use extra tricks to keep some things temporarily hidden. Let’s say we need input like an answer to a quiz or a move in a game from a group of players. We don’t want these players to be able to just watch the blockchain for their competitors’ answers. What we’ll do is have everyone hash their answer and submit that first (the commit). Next, everyone will submit their real answer (the reveal) and we can prove on-chain that it hashes to the committed value.
+Hiding Actions and Generating Random Numbers The Ethereum blockchain is public. 
+Since all transactions are public we have to use extra tricks to keep some things temporarily hidden. 
+Let’s say we need input like an answer to a quiz or a move in a game from a group of players. 
+We don’t want these players to be able to just watch the blockchain for their competitors’ answers. 
+What we’ll do is have everyone hash their answer and submit that first (the commit). 
+Next, everyone will submit their real answer (the reveal) and we can prove on-chain that it hashes to the committed value.
 
 ```
 
