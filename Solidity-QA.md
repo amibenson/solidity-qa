@@ -299,6 +299,51 @@ It is highly recommended to remove all unused variables from a code base.
 
 
 More: <a hre="https://kadenzipfel.github.io/smart-contract-vulnerabilities/">https://kadenzipfel.github.io/smart-contract-vulnerabilities/</a>
+
+## (17) The Difference between abi.encode() and abi.encodePacked() ?
+
+<b>abi.encode()</b> is a Solidity function used to encode data for function calls or storage on the Ethereum blockchain. It takes multiple arguments of different types and generates a tightly packed representation of the data, including type information.
+
+<b>abi.encodePacked()</b> is a function that simply concatenates the arguments without adding any type information or padding. It results in a packed representation of the data, where the arguments are combined without separators or type metadata.
+
+abi.encode() requires more gas compared to abi.encodePacked() due to the additional computations involved in encoding and decoding the data accurately.
+
+On the other hand, abi.encodePacked() lacks type information. It assumes that the decoding end has prior knowledge of the data structure and types used for encoding. If the decoding logic is not aware, it may lead to incorrect data interpretation or vulnerabilities.
+
+To summarize, use abi.encode() when you need accurate decoding and type safety, even if it consumes more gas. It's suitable for scenarios where the decoding logic may not have prior knowledge of the data structure.
+
+Conversely, if you have complete control over the encoding and decoding logic and share the same knowledge of the data structure, abi.encodePacked() can be more gas-efficient. But be cautious about potential data interpretation issues.
+
+## (16) Explain Nonce ('number used once'). What does it mitigate?
+
+A scalar value (zero based) equal to the number of transactions sent from this address or, in the case of an account with associated code, the number of contract-creations made by this account.
+
+The nonce is an attribute of the originating address; It is calculated dynamically, by counting the number of confirmed transactions that have originated from an address.
+
+It mitigate same chain id replay attacks.
+
+See <a href="https://neptunemutual.com/blog/understanding-signature-replay-attack/">example of 3 contracts</a>, one unaware 
+of replay attacks, one mitigating a replay attack on a single network and the last mitigating replay attacks on all EVMs.
+
+## (17) Give example of several ways to mitigate Signature replay attack in Solidity.
+
+- <b>A nonce</b> is a unique number that is created for each transaction. The use of a unique nonce for each transaction ensures that each transaction is distinct and cannot be replicated.
+
+- <b>Using a time-based value</b> as a component of the signature is another method to prevent the Signature Replay Attack. This ensures that each transaction is unique and cannot be replayed after a certain amount of time. This can be accomplished in Solidity by adding a timestamp to the signature.
+
+- Another way to prevent replay attacks is to use a chain-specific signature scheme such as EIP-155, which includes the <b>chain ID in the signed message</b>. This will prevent transactions signed on one chain from being valid on another chain with a different ID.
+
+## (18) How the EVM works. Explain EVM transaction. Why can't it be replayed on another chain?
+ 
+Because it contains the chain id in the signature.
+
+
+
+<a href="https://www.notonlyowner.com/learn/what-happens-when-you-send-one-dai?s=35">What happens when you send 1 DAI</a>
+
+
+<a href="https://medium.com/coinmonks/learn-ethereum-programming-6-transactions-9433ce2f3b25">Learn Ethereum programming #6. Transactions</a>
+
 # Easy Questions
 
 ## (0) What is int and uint?
