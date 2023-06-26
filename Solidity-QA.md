@@ -422,6 +422,13 @@ Many blockchains use different “consensus algorithms” to help defend against
 
 These consensus algorithms don’t actually prevent Sybil attacks, they just make it very impractical for an attacker to successfully carry out a Sybil attack.
 
+## (21) What are Slither, Echidna, Mithril ?
+
+- Slither - Slither is a Solidity static analysis framework written in Python3. It runs a suite of vulnerability detectors, prints visual information about contract details, and provides an API to easily write custom analyses.
+
+- Echidna -  Echidna is a Haskell program designed for fuzzing/property-based testing of Ethereum smart contracts. It uses sophisticated grammar-based fuzzing campaigns based on a contract ABI to falsify user-defined predicates or Solidity assertions
+
+- Mithril - Mythril is a security analysis tool for EVM bytecode. It detects security vulnerabilities in smart contracts built for Ethereum, Hedera, Quorum, Vechain, Roostock, Tron and other EVM-compatible blockchains. It uses symbolic execution, SMT solving and taint analysis to detect a variety of security vulnerabilities. It's also used (in combination with other tools and techniques) in the MythX security analysis platform.
 
 # Easy Questions
 
