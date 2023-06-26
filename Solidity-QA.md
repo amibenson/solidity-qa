@@ -15,6 +15,9 @@ Questions are based on <a href="https://www.rareskills.io/post/solidity-intervie
 
 1. SafeMath: SafeMath is one of the most widely used Solidity libraries. It provides arithmetic operations that prevent overflow and underflow errors, enhancing the security of smart contracts. SafeMath functions such as add, sub, mul, and div ensure safe mathematical operations, preventing vulnerabilities like integer overflow.
 
+<b>NOTE:</b> SafeMath is generally not needed starting with Solidity 0.8, since the compiler now has built in overflow checking.
+
+
 2. OpenZeppelin: OpenZeppelin is a comprehensive library for building secure smart contracts on Ethereum. It offers a range of modules for managing access control, token standards, payment channels, and more. OpenZeppelin’s battle-tested codebase provides developers with a reliable foundation to build secure and audited contracts.
 
 3. ERC20: ERC20 is a standard interface for fungible tokens on Ethereum. The ERC20 library provides the necessary functionality to create, manage, and transfer tokens. By using this library, developers can save time and effort when implementing token functionalities in their contracts.
