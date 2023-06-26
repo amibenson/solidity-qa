@@ -737,9 +737,17 @@ Under proof of stake, the Ethereum block interval is fixed at 12 seconds (or pos
 
 Validators (formerly miners) can still modify the block.timestamp. Before miners could manipulate the block.timestamp but if they were able to create the block. If they had 20 percent of hash power, they had a 20 percent of chance to create the block, so that their transaction will be confirmed. Even if they created the block, it is extra hard to pass the valid "timestamp".
 
-## (7) What is frontrunning?
+## (7-a) What is frontrunning?
 
 A front-running attack occurs when a malicious user observes a transaction after a user broadcasts it and it is waiting in the mempool. The attacker then sends their own transaction for the motive of gaining some profit with higher gas fees. This will lead to the attacker's transaction being executed before the users.
+
+## (7-b) how can you solve frontrunning issues?
+
+Preventative Techniques
+- use commit-reveal scheme (https://medium.com/swlh/exploring-commit-reveal-schemes-on-ethereum-c4ff5a777db8)
+- <a href="https://libsubmarine.org/">use submarine send</a> 
+
+See Solidity code showing how to <a href="https://solidity-by-example.org/hacks/front-running/">mitigate front-running using commit-reveal scheme</a>
 
 ## (8) What is a commit-reveal scheme and when would you use it?
 
