@@ -445,7 +445,29 @@ On the plus side, Ethers.js allows you to write Ethereum smart contracts in Java
 
 Ethers.js offers full type-script support. Web3.js started typescript support after v1.3.0
 
-## (23) Explain Gas Station Network - https://docs.opengsn.org/ - relayers to make the user pay in a token instead of Ether
+## (23) How are Ethereum gas fees calculated?
+
+Gas fees are made up of two components: the gas price and the gas limit. The gas limit is the maximum amount you're willing to spend and the base fee rate is how much it'll cost per unit of gas. You can also choose to add a tip if you want stakers to prioritize your transaction and push it through the network faster. All that adds up to your total fee.
+
+To calculate gas fees, use the following formula
+
+```
+Total fee = Gas limit x (Base Fee Rate + Tip)
+```
+
+Let's say you want to send 1 ETH to a friend on the Ethereum network. The gas limit for this transaction is 21,000, which is the default for simple Ethereum transactions. You decide to set the gas price to 100 gwei, which means you're willing to pay 100 gwei for every unit of gas used in the transaction.
+
+To calculate the gas fee for this transaction, you simply multiply the gas limit (21,000) by the gas price (100 gwei), then convert the result to ETH.
+
+```
+21,000 gas x 100 gwei/gas = 2,100,000 gwei
+
+2,100,000 gwei = 0.0021 ETH
+```
+
+So the gas fee (aka miner fee) for this transaction is 0.0021 ETH. Keep in mind that more complex transactions, such as executing a smart contract, may incur a higher gas fee than doing something simpler, such as sending ETH from one wallet to another. It's also important to ensure that you're paying enough in gas for the transaction to be processed promptly and successfully.
+
+## (24) Explain Gas Station Network - https://docs.opengsn.org/ - relayers to make the user pay in a token instead of Ether
 
 ...
 
