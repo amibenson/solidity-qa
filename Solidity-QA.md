@@ -11,7 +11,27 @@ Questions are based on <a href="https://www.rareskills.io/post/solidity-intervie
 
 **(listen and edit later)**
 
-## (0) What are popular Solidity libraries?
+
+## (0) What are libraries in Solidity? Give example of some popular libraries.
+
+A library in Solidity is a different type of smart contract that contains reusable code. Once deployed on the blockchain (only once), it is assigned a specific address and its properties / methods can be reused many times by other contracts in the Ethereum network.
+
+They enable to develop in a more modular way. Sometimes, it is helpful to think of a library as a singleton in the EVM, a piece of code that can be called from any contract without the need to deploy it again.
+
+Libraries in Solidity are considered stateless, and hence have the following restrictions
+
+- They do not have any storage (so can’t have non-constant state variables)
+- They can’t hold ethers (so can’t have a fallback function)
+- Doesn’t allow payable functions (since they can’t hold ethers)
+- Cannot inherit nor be inherited
+- Can’t be destroyed (no selfdestruct() function since version 0.4.20)
+
+However, libraries can still implement some data type:
+
+- struct and enum: these are user-defined variables.
+- any other variable defined as constant (immutable), since constant variables are stored in the contract’s bytecode, not in storage.
+
+<b>Example of libraries:</b>
 
 1. SafeMath: SafeMath is one of the most widely used Solidity libraries. It provides arithmetic operations that prevent overflow and underflow errors, enhancing the security of smart contracts. SafeMath functions such as add, sub, mul, and div ensure safe mathematical operations, preventing vulnerabilities like integer overflow.
 
@@ -25,6 +45,40 @@ Questions are based on <a href="https://www.rareskills.io/post/solidity-intervie
 4. Chainlink: Chainlink is a decentralized oracle network that provides reliable off-chain data to smart contracts. The Chainlink library enables seamless integration of Chainlink’s oracle services, allowing smart contracts to access real-world data securely and efficiently.
 
 5. Uniswap: Uniswap is a decentralized exchange protocol that facilitates automated token swaps on Ethereum. The Uniswap library provides functions to interact with the Uniswap protocol, allowing developers to integrate decentralized exchange capabilities into their contracts.
+
+
+<b>Here are two scenarios of library deployments:</b>
+
+Embedded Library: If a smart contract is consuming a library which have only internal functions, then the EVM simply embeds library into the contract. Instead of using delegate call to call a function, it simply uses JUMP statement(normal method call). There is no need to separately deploy library in this scenario.
+
+Linked Library : On the flip side, if a library contain public or external functions then library needs to be deployed. The deployment of library will generate a unique address in the blockchain. This address needs to be linked with calling contract.
+
+Using a library:
+
+```
+import {Library1, Library3} from "./library-file.sol";
+
+// -- or --
+
+import LibraryName from “./library-file.sol”;
+
+// -- Usage: --
+
+// Use the library for unsigned integers
+using MathLib for uint;
+
+// Use the library for any data type
+using MathLib for *;
+
+
+uint a = 10;
+uint b= 10;
+uint c = a.subUint(b);
+
+```
+
+We could still do uint c = a - b; It will return the same result which is 0. However our library has some added properties to protect from overflow for example; assert(a >= b); which checks to make sure the first operand ais greater than or equal to the second operand b so that the subtraction operation doesn’t result to a negative value.
+
 
 ## (1) What is Solidity Visual Editor for VSCode?
 
