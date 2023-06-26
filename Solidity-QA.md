@@ -430,6 +430,21 @@ These consensus algorithms don’t actually prevent Sybil attacks, they just mak
 
 - Mithril - Mythril is a security analysis tool for EVM bytecode. It detects security vulnerabilities in smart contracts built for Ethereum, Hedera, Quorum, Vechain, Roostock, Tron and other EVM-compatible blockchains. It uses symbolic execution, SMT solving and taint analysis to detect a variety of security vulnerabilities. It's also used (in combination with other tools and techniques) in the MythX security analysis platform.
 
+## (22) Why is Ethers.JS better than Web3 ?
+
+- Easier for beginners
+- Smaller (Web3 is very bulky for a frontend use)
+- Well tested, documented and maintained
+- Less buggy
+- ENS name can be used in place of contract address
+- Separate handling of key-management and state (provider) which increases security.
+
+Ethers are a considerably lightweight library in comparison to web3.js, thereby guaranteeing the assurance of better performance
+
+On the plus side, Ethers.js allows you to write Ethereum smart contracts in JavaScript directly in the browser, making it simpler and more accessible than other Blockchain languages. It also has more robust support for wallets and authentication than Web3.
+
+Ethers.js offers full type-script support. Web3.js started typescript support after v1.3.0
+
 # Easy Questions
 
 ## (0) What is int and uint?
