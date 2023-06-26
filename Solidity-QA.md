@@ -967,6 +967,12 @@ The event keyword allows you to declare events that can then be thrown during th
 
 ## (25-b) What is ERC721-C?
 
+ERC721-C is a new type of token standard created to effectively make on-chain royalties enforceable. In contrast with ERC-721 and ERC1155 — the most commonly created and traded type of NFTs — this new standard makes royalties programmable, allowing creators to block zero-fee exchanges from platforming their works once and for all.
+
+Conceived by blockchain gaming company Limit Break, ERC721-C (and ERC1155-C) allow creators to set new rules for their royalties on-chain. In simple terms, this new standard means artists and developers can create a sort of permissioned smart contract that dictates where and how royalties are transferred.
+
+Essentially, this new type of customizable royalties contract allows creators to choose where their NFTs are sold and empowers them to filter interactions from only the contracts and applications of their choosing. No longer will traders be able to circumvent royalties by using zero-fee platforms because any collection created with ERC721-C can simply opt out of trading on such marketplaces.
+
 ## (26) What keywords are provided in Solidity to measure time?
 
 ## (27) What is a sandwich attack?
