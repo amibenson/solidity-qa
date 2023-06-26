@@ -408,6 +408,21 @@ sendRawTransaction() requires that the transaction be already signed and seriali
 
 ## (20) What is sybil attack? [Read more](#sybil-attacks-in-commit-reveal-context)
 
+A Sybil attack is a kind of security threat on an online system where one person tries to take over the network by creating multiple accounts, nodes or computers.
+
+This can be as simple as one person creating multiple social media accounts.
+
+But in the world of cryptocurrencies, a more relevant example is where somebody runs multiple nodes on a blockchain network. 
+
+The word “Sybil” in the name comes from a case study about a woman named Sybil Dorsett, who was treated for Dissociative Identity Disorder – also called Multiple Personality Disorder.
+
+So how do blockchains mitigate Sybil attacks?
+
+Many blockchains use different “consensus algorithms” to help defend against Sybil attacks, such as Proof of Work, Proof of Stake, and Delegated Proof of Stake.
+
+These consensus algorithms don’t actually prevent Sybil attacks, they just make it very impractical for an attacker to successfully carry out a Sybil attack.
+
+
 # Easy Questions
 
 ## (0) What is int and uint?
@@ -519,7 +534,7 @@ The smallest unit of ETH is called a wei, which is equivalent to 10^-18 ETH. In 
 
 For solo staking, the minimum deposit required is 32 ETH, which is the amount required to run a validator node on the Ethereum network.
 
-## (19A) Explain: receive() and fallback() functions
+## (19-a) Explain: receive() and fallback() functions
 
 When you program smart contracts you are bound to come across different methods to send ether to EOA(externally owned account) or contracts. Before that let’s take a look at fallback and receive function in solidity.
 
@@ -552,7 +567,7 @@ The functions are invoked by the EVM when a transaction is sent to the contract 
 
 receive() executes on calls to the contract with no data (calldata), such as calls made via send() or transfer().
 
-## (19B) What is the difference between fallback and receive?
+## (19-b) What is the difference between fallback and receive?
 
 In version 0.6.x, the fallback function was split into two separate functions:
 
@@ -807,11 +822,11 @@ The free memory pointer (located at offset 0x40) is the most crucial part of the
 Only public and abstract modifiers are allowed for methods in interfaces.
 ## (19) What is the difference between memory and calldata in a function argument?
 
-## (20A) What does Packing boolean values ​​into uint256 mean ?
+## (20-a) What does Packing boolean values ​​into uint256 mean ?
 
 The bool type in solidity occupies 1 byte in memory, of which only one byte is used. If you need multiple boolean values, you can replace bool with uint32 or uint256 and bitwise arithmetic. So uint256 can store up to 256 boolean values.
 
-## (20B) Describe the three types of storage gas costs.
+## (20-b) Describe the three types of storage gas costs.
 
 - **Use Mappings Instead of Arrays**
 
@@ -947,7 +962,10 @@ The event keyword allows you to declare events that can then be thrown during th
 
 ## (24) What is a bonding curve?
 
-## (25) How does safeMint differ from mint in the OpenZeppelin ERC721 implementation?
+## (25-a) How does safeMint differ from mint in the OpenZeppelin ERC721 implementation?
+
+
+## (25-b) What is ERC721-C?
 
 ## (26) What keywords are provided in Solidity to measure time?
 
