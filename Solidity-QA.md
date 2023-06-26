@@ -721,8 +721,9 @@ Replay attacks: In a blockchain-based application, a replay attack can happen wh
 
 Answer substitution attacks: In activities such as quizzes or voting, an attacker can potentially substitute the user’s answer with their own answer in the absence of the commit-reveal scheme. This can lead to an unfair advantage for the attacker and undermine the integrity of the activity.
 
-#sybil-attacks-in-commit-reveal-context
+<a id="sybil-attacks-in-commit-reveal-context">
 Sybil attacks: In a blockchain-based application, a Sybil attack happens when an attacker creates multiple identities or accounts to manipulate the system’s results. Without the commit-reveal scheme, an attacker can potentially create multiple accounts and submit multiple answers, skewing the results in their favour.
+</a>
 
 Ref: [this](https://medium.com/coinmonks/commit-reveal-scheme-in-solidity-c06eba4091bb){:target="\_blank" rel="noopener"}
 
