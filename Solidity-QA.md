@@ -445,6 +445,12 @@ On the plus side, Ethers.js allows you to write Ethereum smart contracts in Java
 
 Ethers.js offers full type-script support. Web3.js started typescript support after v1.3.0
 
+## (23) Explain Gas Station Network - https://docs.opengsn.org/ - relayers to make the user pay in a token instead of Ether
+
+...
+
+## (24) Explain permit function
+
 # Easy Questions
 
 ## (0) What is int and uint?
