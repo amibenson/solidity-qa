@@ -475,7 +475,19 @@ So the gas fee (aka miner fee) for this transaction is 0.0021 ETH. Keep in mind 
 
 ...
 
-## (24) Explain permit function
+## (24) Explain permit function (ERC-2612: Permit Extension for EIP-20 Signed Approvals)
+
+DAI and Uniswap have lead the way towards a new standard named EIP-2612 which can get rid of the approve + transferFrom, while also allowing gasless token transfers. DAI was the first to add a new permit function to its ERC-20 token. It allows a user to sign an approve transaction off-chain producing a signature that anyone could use and submit to the blockchain. It's a fundamental first step towards solving the gas payment issue and also removes the user-unfriendly 2-step process of sending approve and later transferFrom.
+
+## (25) What is ecrecover in Solidity? Why do you need it?
+
+<a href="https://soliditydeveloper.com/ecrecover">https://soliditydeveloper.com/ecrecover</a>
+
+Why do you need it?
+
+- Meta Transactions - aka Gasless transaction
+- ERC20-Permit
+
 
 # Easy Questions
 
@@ -1222,3 +1234,7 @@ Negative values are more expensive in calldata - Negative values have leading by
 ## Memory vs Storage & When to Use Them
 
 https://medium.com/coinmonks/ethereum-solidity-memory-vs-storage-which-to-use-in-local-functions-72b593c3703a#:~:text=storage%20cannot%20be%20newly%20created,contract%20storage%20(state%20variable)
+
+## EVM tutorial for 3 levels
+
+<a href="https://www.zaryabs.com/evm-learning-resources/">https://www.zaryabs.com/evm-learning-resources/</a>
