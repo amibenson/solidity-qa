@@ -337,12 +337,18 @@ of replay attacks, one mitigating a replay attack on a single network and the la
  
 Because it contains the chain id in the signature.
 
-
-
-<a href="https://www.notonlyowner.com/learn/what-happens-when-you-send-one-dai?s=35">What happens when you send 1 DAI</a>
+<a href="https://www.notonlyowner.com/learn/what-happens-when-you-send-one-dai?s=35">What happens when you send 1 DAI</a> - contains the best explanation I had read about how an EVM transaction is constructed and what does it contain.
 
 
 <a href="https://medium.com/coinmonks/learn-ethereum-programming-6-transactions-9433ce2f3b25">Learn Ethereum programming #6. Transactions</a>
+
+## (19) Explain the Difference between sendTransaction and sendRawTransaction.
+
+Both are Ethereum API functions which broadcast a transaction to the Ethereum network so it will be added to a future block.
+
+sendTransaction() only supports sending unsigned transactions. In order to use it, your node must be managing your private key. Since the node must manage your key, you must not use it with a hosted node.
+
+sendRawTransaction() requires that the transaction be already signed and serialized. So it requires extra serialization steps to use, but enables you to broadcast transactions on hosted nodes.
 
 # Easy Questions
 
