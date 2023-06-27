@@ -350,6 +350,8 @@ The solution Solidity provides to the Diamond Problem is by using reverse C3 lin
 
 - Insufficient Access Control
 
+- Precision Loss / Lack of Precision
+
 - Presence of Unused Variables
 
 Although it is allowed, it is best practice to avoid unused variables. Unused variables can lead to a few different problems:
