@@ -648,9 +648,13 @@ bytes memory bstr = new bytes(10);
 string message = string(bstr);
 ```
 
-## (33) Solidity Gas Optimization: A bit about it.
+## (33) Solidity Gas Optimization: A bit about it...
 
 - <a href="https://medium.com/@kalexotsu/solidity-gas-optimization-stop-using-bools-for-true-false-values-e3a3d513f7fa">Stop Using Bools for True/False Values</a>
+
+## (34) Inheritance, Inheritance Order and the super keyword: A bit about these...
+
+- <a href="https://medium.com/@kalexotsu/inheritance-inheritance-order-and-the-super-keyword-in-solidity-bbe49a2478b6">Inheritance, Inheritance Order, and the 'super' Keyword in Solidity</a>
 
 # Easy Questions
 
