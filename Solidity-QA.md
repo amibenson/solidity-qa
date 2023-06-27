@@ -316,7 +316,7 @@ Properties of Calldata:
 
 - <a href="https://kadenzipfel.github.io/smart-contract-vulnerabilities/vulnerabilities/unsafe-low-level-call.html">Unsafe Low-Level Call</a>
 
-- Signature Malleability [Answered](#signature-malleability-vulnerability)
+- Signature Malleability ([see here](#signature-malleability-vulnerability))
 
 - Delegatecall to Untrusted Callee
 
