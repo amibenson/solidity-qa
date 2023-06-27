@@ -468,8 +468,9 @@ So the gas fee (aka miner fee) for this transaction is 0.0021 ETH. Keep in mind 
 
 DAI and Uniswap have lead the way towards a new standard named EIP-2612 which can get rid of the approve + transferFrom, while also allowing gasless token transfers. DAI was the first to add a new permit function to its ERC-20 token. It allows a user to sign an approve transaction off-chain producing a signature that anyone could use and submit to the blockchain. It's a fundamental first step towards solving the gas payment issue and also removes the user-unfriendly 2-step process of sending approve and later transferFrom.
 
-## (26) What is ecrecover in Solidity? Why do you need it?
+## (26) What is ecrecover in Solidity? Why do you need it? What is a common vulnerability with ecrecover?
 
+<a id="ecrecover"></a>
 <a href="https://soliditydeveloper.com/ecrecover">https://soliditydeveloper.com/ecrecover</a>
 
 Why do you need it?
@@ -1156,6 +1157,8 @@ Solidity does not support floating point values there are many reasons but the m
 ## (14) How can the name of a function affect its gas cost, if at all?
 
 ## (15) What is a common vulnerability with ecrecover?
+
+[Answered Above](#ecrecover)
 
 ## (16) What is the difference between an optimistic rollup and a zk-rollup?
 
