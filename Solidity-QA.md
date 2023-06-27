@@ -312,7 +312,7 @@ Properties of Calldata:
 
 - Authorization Through tx.origin
 
-- DoS with (Unexpected) revert
+- DoS with (Unexpected) revert ([read more](https://github.com/kadenzipfel/smart-contract-vulnerabilities/blob/master/vulnerabilities/dos-revert.md))
 
 DoS (Denial of Service) attacks can occur in functions when you try to send funds to a user and the functionality relies on that fund transfer being successful.
 
