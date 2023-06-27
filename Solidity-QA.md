@@ -312,6 +312,10 @@ Properties of Calldata:
 
 - Authorization Through tx.origin
 
+- Asserting contract from Code Size
+
+- Incorrect Inheritance Order ([read more](https://medium.com/@kalexotsu/inheritance-inheritance-order-and-the-super-keyword-in-solidity-bbe49a2478b6))
+
 - DoS with (Unexpected) revert ([read more](https://github.com/kadenzipfel/smart-contract-vulnerabilities/blob/master/vulnerabilities/dos-revert.md))
 
 DoS (Denial of Service) attacks can occur in functions when you try to send funds to a user and the functionality relies on that fund transfer being successful.
