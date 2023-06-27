@@ -316,7 +316,7 @@ Properties of Calldata:
 
 - <a href="https://kadenzipfel.github.io/smart-contract-vulnerabilities/vulnerabilities/unsafe-low-level-call.html">Unsafe Low-Level Call</a>
 
-- Signature Malleability
+- Signature Malleability [Answered](#signature-malleability-vulnerability)
 
 - Delegatecall to Untrusted Callee
 
@@ -549,6 +549,8 @@ Why do you need ecrecover for?
 
 - Meta Transactions - aka Gasless transaction
 - ERC20-Permit
+
+<a id="signature-malleability-vulnerability"></a>
 
 ## (27) What is Signature Malleability vulnerability?
 
