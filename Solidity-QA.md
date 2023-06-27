@@ -2,14 +2,13 @@
 
 Questions are based on <a href="https://www.rareskills.io/post/solidity-interview-questions" target="_blank">Solidity Interview Questions</a>
 
-## More questions from Dravee’s Incredible Journey 
+## More questions from Dravee’s Incredible Journey
 
 **(listen and edit later)**
 
 <a href="https://www.youtube.com/watch?v=Zf1tWIQ2vh8" target="_blank">From Beginner to Web3 Security Pro: Dravee’s Incredible Journey</a>
 
 https://www.youtube.com/watch?v=Zf1tWIQ2vh8&t=21:00
-
 
 ## (0) What are libraries in Solidity? Give example of some popular libraries.
 
@@ -36,7 +35,6 @@ However, libraries can still implement some data type:
 
 <b>NOTE:</b> SafeMath is generally not needed starting with Solidity 0.8, since the compiler now has built in overflow checking.
 
-
 2. OpenZeppelin: OpenZeppelin is a comprehensive library for building secure smart contracts on Ethereum. It offers a range of modules for managing access control, token standards, payment channels, and more. OpenZeppelin’s battle-tested codebase provides developers with a reliable foundation to build secure and audited contracts.
 
 3. ERC20: ERC20 is a standard interface for fungible tokens on Ethereum. The ERC20 library provides the necessary functionality to create, manage, and transfer tokens. By using this library, developers can save time and effort when implementing token functionalities in their contracts.
@@ -44,7 +42,6 @@ However, libraries can still implement some data type:
 4. Chainlink: Chainlink is a decentralized oracle network that provides reliable off-chain data to smart contracts. The Chainlink library enables seamless integration of Chainlink’s oracle services, allowing smart contracts to access real-world data securely and efficiently.
 
 5. Uniswap: Uniswap is a decentralized exchange protocol that facilitates automated token swaps on Ethereum. The Uniswap library provides functions to interact with the Uniswap protocol, allowing developers to integrate decentralized exchange capabilities into their contracts.
-
 
 <b>Here are two scenarios of library deployments:</b>
 
@@ -78,7 +75,6 @@ uint c = a.subUint(b);
 
 We could still do uint c = a - b; It will return the same result which is 0. However our library has some added properties to protect from overflow for example; assert(a >= b); which checks to make sure the first operand ais greater than or equal to the second operand b so that the subtraction operation doesn’t result to a negative value.
 
-
 ## (1) What is Solidity Visual Editor for VSCode?
 
 https://marketplace.visualstudio.com/items?itemName=tintinweb.solidity-visual-auditor
@@ -90,7 +86,6 @@ https://www.youtube.com/watch?v=Zf1tWIQ2vh8&t=21:00
 ## (3) What is more gas efficient: pre increment ++i or post increment i++ ?
 
 The pre-increment operation (++i) boils down to incrementing the value at i, then returning the value (2 operations). The post-increment operation (i++) boils down to saving the original value of i, incrementing it and saving that to a temporary place in memory, and then returning the original value; only after that value is returned is the value of i actually updated (4 operations). As you can see, the <b>pre-increment operation uses less opcodes and is thus more gas efficient</b>.
-
 
 ## (4) What are bot races in Code4Arena ?
 
@@ -106,7 +101,6 @@ Interfaces are similar to abstract contracts, but they are limited to what the c
 - Interfaces cannot define variables
 - Interfaces cannot define structs
 - Interfaces cannot define enums
-
 
 Interfaces are expressed using the interface keyword. Here’s an example:
 
@@ -140,7 +134,7 @@ contract Employee is Person {
 }
 ```
 
-An instance of an abstract cannot be created. Abstract contracts are used as base contracts so that the child contract can inherit and utilize its functions. The abstract contract defines the structure of the contract and any derived contract inherited from it should provide an implementation for the incomplete functions, and if the derived contract is also not implementing the incomplete functions then that derived contract will also be marked as abstract. An abstract contract is declared using the abstract keyword. 
+An instance of an abstract cannot be created. Abstract contracts are used as base contracts so that the child contract can inherit and utilize its functions. The abstract contract defines the structure of the contract and any derived contract inherited from it should provide an implementation for the incomplete functions, and if the derived contract is also not implementing the incomplete functions then that derived contract will also be marked as abstract. An abstract contract is declared using the abstract keyword.
 
 Example of an abstract contract:
 
@@ -173,7 +167,7 @@ contract DerivedContract is AbstractContract{
 	string memory){
 		return _strIn;
 	}
-	
+
 	function setValue(
 	uint _in1, uint _in2) public override{
 		num1 = _in1;
@@ -188,7 +182,7 @@ contract DerivedContract is AbstractContract{
 contract Call{
 	// Creating an instance of an abstract contract
 	AbstractContract abs;
-	
+
 	// Creating an object of child contract
 	constructor(){
 		abs = new DerivedContract();
@@ -229,7 +223,6 @@ However, this extremely open approach presents another challenge for the blockch
 
 And why is this important again? Remember, I wanted to spin up 501 extremely weak machines to take over our example blockchain. Now I have to spin up 501 machines that have comparable computational power to a modern computer. That's expensive as hell! So in the case of blockchains, the point of PoW is to make it if not impossible, then at least unfeasable for a single entity to overtake the collective management system.
 
-
 **Takeaways**
 When you’re building large, complex dapps, extensibility is key.
 Abstract contracts are base contracts in which at least one of their functions lacks an implementation.
@@ -266,7 +259,6 @@ Library Contracts: delegateCall can be used to implement library contracts that 
 ## (12) Give examples of Known attacks?
 
 Consensys <a href="https://consensys.github.io/smart-contract-best-practices/attacks/" target="_blank">https://consensys.github.io/smart-contract-best-practices/attacks/</a>
-
 
 ## (13) Why all of OpenZeppelin, for example, contracts that are imported by dApps are abstract, see below, although some of them implement all their functions?
 
@@ -316,7 +308,6 @@ Properties of Calldata:
 - No n-persistent (after the transaction has completed)
 - Specific to transactions and contract calls.
 
-
 ## (16) Give examples of some Smart Contract Vulnerabilities.
 
 - Authorization Through tx.origin
@@ -353,7 +344,6 @@ Although it is allowed, it is best practice to avoid unused variables. Unused va
 
 It is highly recommended to remove all unused variables from a code base.
 
-
 More: <a hre="https://kadenzipfel.github.io/smart-contract-vulnerabilities/">https://kadenzipfel.github.io/smart-contract-vulnerabilities/</a>
 
 ## (17) The Difference between abi.encode() and abi.encodePacked() ?
@@ -378,7 +368,7 @@ The nonce is an attribute of the originating address; It is calculated dynamical
 
 It mitigate same chain id replay attacks.
 
-See <a href="https://neptunemutual.com/blog/understanding-signature-replay-attack/">example of 3 contracts</a>, one unaware 
+See <a href="https://neptunemutual.com/blog/understanding-signature-replay-attack/">example of 3 contracts</a>, one unaware
 of replay attacks, one mitigating a replay attack on a single network and the last mitigating replay attacks on all EVMs.
 
 ## (17) Give example of several ways to mitigate Signature replay attack in Solidity.
@@ -390,11 +380,10 @@ of replay attacks, one mitigating a replay attack on a single network and the la
 - Another way to prevent replay attacks is to use a chain-specific signature scheme such as EIP-155, which includes the <b>chain ID in the signed message</b>. This will prevent transactions signed on one chain from being valid on another chain with a different ID.
 
 ## (18) How the EVM works. Explain EVM transaction. Why can't it be replayed on another chain?
- 
+
 Because it contains the chain id in the signature.
 
 <a href="https://www.notonlyowner.com/learn/what-happens-when-you-send-one-dai?s=35">What happens when you send 1 DAI</a> - contains the best explanation I had read about how an EVM transaction is constructed and what does it contain.
-
 
 <a href="https://medium.com/coinmonks/learn-ethereum-programming-6-transactions-9433ce2f3b25">Learn Ethereum programming #6. Transactions</a>
 
@@ -412,7 +401,7 @@ A Sybil attack is a kind of security threat on an online system where one person
 
 This can be as simple as one person creating multiple social media accounts.
 
-But in the world of cryptocurrencies, a more relevant example is where somebody runs multiple nodes on a blockchain network. 
+But in the world of cryptocurrencies, a more relevant example is where somebody runs multiple nodes on a blockchain network.
 
 The word “Sybil” in the name comes from a case study about a woman named Sybil Dorsett, who was treated for Dissociative Identity Disorder – also called Multiple Personality Disorder.
 
@@ -426,7 +415,7 @@ These consensus algorithms don’t actually prevent Sybil attacks, they just mak
 
 - Slither - Slither is a Solidity static analysis framework written in Python3. It runs a suite of vulnerability detectors, prints visual information about contract details, and provides an API to easily write custom analyses.
 
-- Echidna -  Echidna is a Haskell program designed for fuzzing/property-based testing of Ethereum smart contracts. It uses sophisticated grammar-based fuzzing campaigns based on a contract ABI to falsify user-defined predicates or Solidity assertions
+- Echidna - Echidna is a Haskell program designed for fuzzing/property-based testing of Ethereum smart contracts. It uses sophisticated grammar-based fuzzing campaigns based on a contract ABI to falsify user-defined predicates or Solidity assertions
 
 - Mithril - Mythril is a security analysis tool for EVM bytecode. It detects security vulnerabilities in smart contracts built for Ethereum, Hedera, Quorum, Vechain, Roostock, Tron and other EVM-compatible blockchains. It uses symbolic execution, SMT solving and taint analysis to detect a variety of security vulnerabilities. It's also used (in combination with other tools and techniques) in the MythX security analysis platform.
 
@@ -464,10 +453,10 @@ To calculate the gas fee for this transaction, you simply multiply the gas limit
 
 2,100,000 gwei = 0.0021 ETH
 ```
+
 <b>
 NOTE: Gwei is defined as one-billionth (one Nano) of an Ether. So 1 Gwei equals 0.000000001 or 10-9 ETH.
 </b>
-
 
 So the gas fee (aka miner fee) for this transaction is 0.0021 ETH. Keep in mind that more complex transactions, such as executing a smart contract, may incur a higher gas fee than doing something simpler, such as sending ETH from one wallet to another. It's also important to ensure that you're paying enough in gas for the transaction to be processed promptly and successfully.
 
@@ -475,11 +464,11 @@ So the gas fee (aka miner fee) for this transaction is 0.0021 ETH. Keep in mind 
 
 ...
 
-## (24) Explain permit function (ERC-2612: Permit Extension for EIP-20 Signed Approvals)
+## (25) Explain permit function (ERC-2612: Permit Extension for EIP-20 Signed Approvals)
 
 DAI and Uniswap have lead the way towards a new standard named EIP-2612 which can get rid of the approve + transferFrom, while also allowing gasless token transfers. DAI was the first to add a new permit function to its ERC-20 token. It allows a user to sign an approve transaction off-chain producing a signature that anyone could use and submit to the blockchain. It's a fundamental first step towards solving the gas payment issue and also removes the user-unfriendly 2-step process of sending approve and later transferFrom.
 
-## (25) What is ecrecover in Solidity? Why do you need it?
+## (26) What is ecrecover in Solidity? Why do you need it?
 
 <a href="https://soliditydeveloper.com/ecrecover">https://soliditydeveloper.com/ecrecover</a>
 
@@ -488,6 +477,62 @@ Why do you need it?
 - Meta Transactions - aka Gasless transaction
 - ERC20-Permit
 
+## (27) What is a relayer? How do they submit a transaction in name of another user?
+
+In a meta transaction, the user’s transaction is actually executed by another account that pays the gas fees on their behalf. This account is known as a “relayer”, and it can be a contract or a regular Ethereum account. The relayer receives the transaction from the user, signs it with its own private key, and then submits it to the network to be mined. The user’s transaction is essentially wrapped in a second transaction that pays the gas fees, allowing the user to interact with the contract without having to pay for gas themselves.
+
+## (28) Explain the EVM stack. Its Max Depth, Size and why chosen this way.
+
+The EVM runs as a stack machine with a depth of 1024 items. Each item is a 256 bit word (32 bytes), which was chosen due its compatibility with 256-bit encryption. Since the EVM is a stack-based VM, you typically PUSH data onto the top of it, POP data off, and apply instructions like ADD or MUL to the first few values that lay on top of it.
+
+It follow the LIFO (Last In, First Out) principle, where the last element to be added is the first element to be removed. If you use the MUL opcode (which multiplies the two values at the top of the stack), top item #1 and top item #2 get popped from the stack and replaced by their product.
+
+## (29) Explain Memory and Calldata.
+
+In the EVM, memory can be thought of as an expandable, byte-addressed, 1 dimensional array. It starts out being empty, and it costs gas to read, write to, and expand it. Calldata on the other hand is very similar, but it is NOT able to be expanded or overwritten. It is included in the transaction's payload, and acts as input for contract calls.
+
+256 bit load & store:
+
+Reading from memory or calldata will always access the first 256 bits (32 bytes or 1 word) after the given pointer.
+
+Storing to memory will always write bytes to the first 256 bits (32 bytes or 1 word) after the given pointer.
+
+Memory and calldata are not persistent, they are volatile- after the transaction finishes executing, they are forgotten.
+
+## (30) What's the size of contract Storage?
+
+There are a total of 2^256 storage slots due to the 32 byte key size.
+
+A smart contract's storage consists of 2²⁵⁶ slots, where each slot can contain values of size up to 32 bytes. Under the hood, the contract storage is a key-value store, where 256 bits keys map to 256 bits values.
+
+## (30) What's the difference between string and bytes?
+
+Solidity supports String literal using both double quote (") and single quote ('). It provides string as a data type to declare a variable of type String.
+
+```
+pragma solidity ^0.5.0;
+
+contract SolidityTest {
+   string data = "test";
+}
+```
+
+In above example, "test" is a string literal and data is a string variable. More preferred way is to use byte types instead of String <b>as string operation requires more gas as compared to byte operation</b>. Solidity provides inbuilt conversion between bytes to string and vice versa. In Solidity we can assign String literal to a byte32 type variable easily. Solidity considers it as a byte32 literal.
+
+```
+pragma solidity ^0.5.0;
+
+contract SolidityTest {
+   bytes32 data = "test";
+}
+```
+
+Bytes can be converted to String using string() constructor.
+
+```
+bytes memory bstr = new bytes(10);
+string message = string(bstr);
+```
 
 # Easy Questions
 
@@ -512,15 +557,15 @@ Access types:
 
 **NOTE:** You cannot call a private or internal function in **another contract**.
 
-Private functions can only be called from inside the contract, even the inherited contracts can't call them. Public functions can be called from anywhere. 
+Private functions can only be called from inside the contract, even the inherited contracts can't call them. Public functions can be called from anywhere.
 
 external: External functions are part of the contract interface, which means they can be called from **other contracts** and via transactions.
 
 In a nutshell, public and external differs in terms of gas usage. **Public functions use more gas than External functions** when used with large arrays of data. This is due to the fact that **Solidity copies arguments to memory on a public function** while **external read from calldata** which is cheaper than memory allocation.
 
-State variables cannot be marked as external. 
+State variables cannot be marked as external.
 
-public − Public Functions/Variables can be used both externally and internally. 
+public − Public Functions/Variables can be used both externally and internally.
 For public state variable, Solidity automatically creates a getter function.
 
 internal − Internal functions/Variables can only be used internally or by derived contracts.
@@ -569,11 +614,11 @@ The tx.origin variable can be manipulated in certain scenarios where malicious a
 
 ## (12) What hash function does Ethereum primarily use?
 
-Keccak256 can be used in many different ways in Solidity, depending on your needs. 
+Keccak256 can be used in many different ways in Solidity, depending on your needs.
 
 Keccak256 outputs a 256-bit hash value, which makes it resistant to brute-force attacks.
- 
- Some common use cases include:
+
+Some common use cases include:
 
 - **Generating random numbers**: You can use Keccak256 to generate random numbers by hashing a seed value with a block timestamp or block hash.
 
@@ -604,7 +649,6 @@ For solo staking, the minimum deposit required is 32 ETH, which is the amount re
 
 When you program smart contracts you are bound to come across different methods to send ether to EOA(externally owned account) or contracts. Before that let’s take a look at fallback and receive function in solidity.
 
-
 Both the fallback and receive functions are special type of functions available in Ethereum.We cannot invoke these functions directly by using their name and they :
 
 - should be declared with external scope visibility
@@ -620,7 +664,7 @@ Both the fallback and receive functions are special type of functions available 
         }
 
         fallback() external payable {
-          
+
         }
     }
 ```
@@ -652,11 +696,11 @@ Reentrancy is a programming technique in which a function execution is interrupt
 
 ## (22) What prevents infinite loops from running forever in view functions?
 
-When view function is executed on-chain, i.e. within mined transaction, it consumes gas, and this protects node from infinite loops. 
+When view function is executed on-chain, i.e. within mined transaction, it consumes gas, and this protects node from infinite loops.
 
 ## (23) What is the difference between tx.origin and msg.sender?
 
-The difference between the two is fairly simple (as of early 2023); tx. origin is the address of the EOA (externally ownder account) that originated the transaction, and msg. sender is the address of whatever called the currently executing smart contract (could be an EOA or a smart contract).
+The difference between the two is fairly simple (as of early 2023); tx. origin is the address of the EOA (externally owned account) that originated the transaction, and msg. sender is the address of whatever called the currently executing smart contract (could be an EOA or a smart contract).
 
 ## (24) How do you send Ether to a contract that does not have payable functions, or a receive or fallback?
 
@@ -746,7 +790,7 @@ function transferEth(uint _amount,address payable receiverAdr) public payable {
     require(success,"Failed to send Eth!");
 }
 
-// using other parameters 
+// using other parameters
 
 function transferEth(uint _amount,address payable receiverAdr) public payable {
     (bool success, bytes memory data) = receiverAdr.call{gas :10000, value: _amount}("other_func(uint256 args)");
@@ -755,7 +799,6 @@ function transferEth(uint _amount,address payable receiverAdr) public payable {
 ```
 
 If a low-level call’s return value is not verified, execution may continue even if the function call throws an error. This may result in unexpected behaviour and sabotage the logic of the program.A failed call can even be caused by an attacker, who may be able to further exploit the application.
-
 
 ## (2) How do you write a gas-efficient for loop in Solidity?
 
@@ -788,8 +831,9 @@ A front-running attack occurs when a malicious user observes a transaction after
 ## (7-b) how can you solve frontrunning issues?
 
 Preventative Techniques
+
 - use commit-reveal scheme (https://medium.com/swlh/exploring-commit-reveal-schemes-on-ethereum-c4ff5a777db8)
-- <a href="https://libsubmarine.org/">use submarine send</a> 
+- <a href="https://libsubmarine.org/">use submarine send</a>
 
 See Solidity code showing how to <a href="https://solidity-by-example.org/hacks/front-running/">mitigate front-running using commit-reveal scheme</a>
 
@@ -799,11 +843,11 @@ Short answer or rational:
 
 ```
 
-Hiding Actions and Generating Random Numbers The Ethereum blockchain is public. 
-Since all transactions are public we have to use extra tricks to keep some things temporarily hidden. 
-Let’s say we need input like an answer to a quiz or a move in a game from a group of players. 
-We don’t want these players to be able to just watch the blockchain for their competitors’ answers. 
-What we’ll do is have everyone hash their answer and submit that first (the commit). 
+Hiding Actions and Generating Random Numbers The Ethereum blockchain is public.
+Since all transactions are public we have to use extra tricks to keep some things temporarily hidden.
+Let’s say we need input like an answer to a quiz or a move in a game from a group of players.
+We don’t want these players to be able to just watch the blockchain for their competitors’ answers.
+What we’ll do is have everyone hash their answer and submit that first (the commit).
 Next, everyone will submit their real answer (the reveal) and we can prove on-chain that it hashes to the committed value.
 
 ```
@@ -841,9 +885,9 @@ The **Storage** is one of the four data locations a solidity smart contract has 
 
 ## (12) How does an AMM price assets?
 
-AMM use a mathematical formula to price assets based on liquidity, aka demand. 
+AMM use a mathematical formula to price assets based on liquidity, aka demand.
 
-Most AMMs use a **constant product** market maker model. The formula for this model is **X * Y = K** (K is a constant). 
+Most AMMs use a **constant product** market maker model. The formula for this model is **X \* Y = K** (K is a constant).
 
 A **constant sum AMM** can be considered a range-bound AMM with a very narrow range (good for stables) and uses the formula **X + Y = K**.
 
@@ -857,7 +901,7 @@ In the blockchain, a signature replay attack is an attack whereby a previously e
 
 One preventive technique is signing messages with a nonce and the address of the contract. Nonces, acronym for “number used only once”, would make each signed message unique. Also, by including the contract address in the signed message, the signature cannot be used to authenticate transactions for other contracts.
 
-- ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) Bad: 
+- ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) Bad:
 
 ```
 function transfer(address payable to, uint amount, bytes memory signature) external {
@@ -868,7 +912,7 @@ function transfer(address payable to, uint amount, bytes memory signature) exter
 }
 ```
 
-- ![#c5f015](https://placehold.co/15x15/c5f015/c5f015.png) Good: 
+- ![#c5f015](https://placehold.co/15x15/c5f015/c5f015.png) Good:
 
 ```
 function transfer(address payable to, uint amount, bytes memory signature, uint nonce) external {
@@ -880,6 +924,7 @@ function transfer(address payable to, uint amount, bytes memory signature, uint 
   to.transfer(amount);
 }
 ```
+
 ## (15) What is gas griefing?
 
 A gas griefing attack happens when a user sends the amount of gas required to execute the target smart contract, but not its sub calls.
@@ -900,6 +945,7 @@ https://www.rareskills.io/post/solidity-gasleft
 
 https://coinsbench.com/solidity-smart-contract-for-rock-paper-scissors-6420f43d534d
 TBD
+
 ## (17) What is the free memory pointer and where is it stored?
 
 The free memory pointer (located at offset 0x40) is the most crucial part of the EVM memory. It must be handled with care, especially in assembly/Yul.
@@ -907,6 +953,7 @@ The free memory pointer (located at offset 0x40) is the most crucial part of the
 ## (18) What function modifiers are valid for interfaces?
 
 Only public and abstract modifiers are allowed for methods in interfaces.
+
 ## (19) What is the difference between memory and calldata in a function argument?
 
 ## (20-a) What does Packing boolean values ​​into uint256 mean ?
@@ -921,26 +968,26 @@ There are two data types to describe lists of data in Solidity, arrays and maps,
 
 Except where iteration is required or data types can be packed, it is advised to use mappings to manage lists of data in order to conserve gas. This is beneficial for both memory and storage.
 
-An integer index can be used as a key in a mapping to control an ordered list. Another advantage of mappings is that you can access any value without having to iterate through an array as would otherwise be necessary. 
+An integer index can be used as a key in a mapping to control an ordered list. Another advantage of mappings is that you can access any value without having to iterate through an array as would otherwise be necessary.
 
 - **Pack Your Variables**
 
 When processing data, the EVM adopts a novel approach: each contract has a storage location where data is kept permanently, as well as a persistent storage space where data can be read, written, and updated.
 
-There are 2,256 slots in the storage, each of which holds 32 bytes. Depending on their particular nature, the "state variables," or variables declared in a smart contract that are not within any function, will be stored in these slots. 
+There are 2,256 slots in the storage, each of which holds 32 bytes. Depending on their particular nature, the "state variables," or variables declared in a smart contract that are not within any function, will be stored in these slots.
 
 Smaller-sized state variables (i.e. variables with less than 32 bytes in size), are saved as index values in the sequence in which they were defined, with 0 for position 1, 1 for position 2, and so on. If small values are stated sequentially, they will be stored in the same slot, including very small values like uint64.
 
 Consider the following example:
 
 ### Before
-Small values are not stored sequentially and use unnecessary storage space.
 
+Small values are not stored sequentially and use unnecessary storage space.
 
 ```
 contract MyContract {
-  uint128 c; 
-  uint256 b; 
+  uint128 c;
+  uint256 b;
   uint128 a;
 }
 ```
@@ -951,16 +998,15 @@ Small values are stored sequentially and use less storage space because they are
 
 ```
 contract Leggo {
-  uint128 a;  
-  uint128 c;  
-  uint256 b; 
+  uint128 a;
+  uint128 c;
+  uint256 b;
 }
 ```
 
 - **Free Up Unused Storage**
 
 Deleting your unused variables helps free up space and earns a gas refund. Deleting unused variables has the same effect as reassigning the value type with its default value, such as the integer's default value of 0, or the address zero for addresses.
-
 
 ```
 //Using delete keyword
@@ -972,7 +1018,7 @@ myInt = 0;
 
 Mappings, however, are unaffected by deletion, as the keys of mappings may be arbitrary and are generally unknown. Therefore, if you delete a struct, all of its members that are not mappings will reset and also recurse into its members. However, individual keys and the values they relate to can be removed.
 
-- **Store Data in calldata Instead of Memory for Certain Function Parameters** 
+- **Store Data in calldata Instead of Memory for Certain Function Parameters**
 
 Instead of copying variables to memory, it is typically more cost-effective to load them immediately from calldata. If all you need to do is read data, you can conserve gas by saving the data in calldata.
 
@@ -991,6 +1037,7 @@ function func1 (uint[] memory nums) external {
  }
 }
 ```
+
 Because the values in calldata cannot be changed while the function is being executed, if the variable needs to be updated when calling a function, use memory instead.
 
 - **Use immutable and constant**
@@ -1004,7 +1051,7 @@ contract MyContract {
 
     constructor() {
         a = 5;
-    } 
+    }
 }
 
 ```
@@ -1030,12 +1077,11 @@ function two() external view returns  (string memory){
 
 ```
 - <a href="https://www.alchemy.com/overviews/solidity-gas-optimization" target="_blank">https://www.alchemy.com/overviews/solidity-gas-optimization</a>
- 
+
 
 - <a href="https://prog.world/esoteric-gas-optimization-in-solidity/" target="_blank">https://prog.world/esoteric-gas-optimization-in-solidity/</a>
 
 ```
-
 
 ## (20C) Why use indexed arguments in events?
 
@@ -1050,7 +1096,6 @@ The event keyword allows you to declare events that can then be thrown during th
 ## (24) What is a bonding curve?
 
 ## (25-a) How does safeMint differ from mint in the OpenZeppelin ERC721 implementation?
-
 
 ## (25-b) What is ERC721-C?
 
@@ -1227,7 +1272,6 @@ Negative values are more expensive in calldata - Negative values have leading by
 ## (28) What is a zk-friendly hash function and how does it differ from a non-zk-friendly hash function?
 
 ## (29) What is a nullifier in the context of zero knowledge, and what is it used for?
-
 
 # More resources:
 
