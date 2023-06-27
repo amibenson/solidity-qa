@@ -648,6 +648,10 @@ bytes memory bstr = new bytes(10);
 string message = string(bstr);
 ```
 
+## (33) Solidity Gas Optimization: A bit about it.
+
+- <a href="https://medium.com/@kalexotsu/solidity-gas-optimization-stop-using-bools-for-true-false-values-e3a3d513f7fa">Stop Using Bools for True/False Values</a>
+
 # Easy Questions
 
 ## (0) What is int and uint?
