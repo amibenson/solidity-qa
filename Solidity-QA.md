@@ -541,7 +541,7 @@ function unlock(
 Signature Best Practice
 The above example is just one example, in which non-unique signatures can be replayed. In most scenarios, it is important to make sure signatures are uniquely matched to each call, in order to prevent replay attacks. This is also the reason Ethereum transactions themselves include a nonce (just like in our solution above).
 
-However, the code is not yet perfect. It does not follow the recommended best practice for signature verification. The reason for this is that <b>it does not check for malleable signatures</b> (see next question). s values that are part of accepted signatures should be checked to be in lower ranges. The recommended procedure for using the ecrecover function can found in Open Zeppelin’s excellent ECDSA library. In fact, building on community audited code, such as Open Zeppelin, is always a good idea.
+However, the code is not yet perfect. It does not follow the recommended best practice for signature verification. The reason for this is that <b>it does not check for malleable signatures</b> (see next question about Signature Malleability vulnerability). s values that are part of accepted signatures should be checked to be in lower ranges. The recommended procedure for using the ecrecover function can found in Open Zeppelin’s excellent ECDSA library. In fact, building on community audited code, such as Open Zeppelin, is always a good idea.
 
 Read more: <a href="https://soliditydeveloper.com/ecrecover">https://soliditydeveloper.com/ecrecover</a>
 
