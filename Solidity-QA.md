@@ -312,6 +312,18 @@ Properties of Calldata:
 
 - Authorization Through tx.origin
 
+- DoS with (Unexpected) revert
+
+DoS (Denial of Service) attacks can occur in functions when you try to send funds to a user and the functionality relies on that fund transfer being successful.
+
+This can be problematic in the case that the funds are sent to a smart contract created by a bad actor, since they can simply create a fallback function that reverts all payments.
+
+This can also be problematic without an attacker present. For example, you may want to pay an array of users by iterating through the array, and of course you would want to make sure each user is properly paid. The problem here is that if one payment fails, the funtion is reverted and no one is paid.
+
+<b>solution</b>
+
+An effective solution to this problem would be to use a pull payment system over the above push payment system. To do this, separate each payment into it's own transaction, and have the recipient call the function.
+
 - Floating Pragma
 
 - <a href="https://kadenzipfel.github.io/smart-contract-vulnerabilities/vulnerabilities/unsafe-low-level-call.html">Unsafe Low-Level Call</a>
