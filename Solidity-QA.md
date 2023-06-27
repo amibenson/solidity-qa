@@ -468,27 +468,122 @@ So the gas fee (aka miner fee) for this transaction is 0.0021 ETH. Keep in mind 
 
 DAI and Uniswap have lead the way towards a new standard named EIP-2612 which can get rid of the approve + transferFrom, while also allowing gasless token transfers. DAI was the first to add a new permit function to its ERC-20 token. It allows a user to sign an approve transaction off-chain producing a signature that anyone could use and submit to the blockchain. It's a fundamental first step towards solving the gas payment issue and also removes the user-unfriendly 2-step process of sending approve and later transferFrom.
 
+<a id="ecrecover"></a>
+
 ## (26) What is ecrecover in Solidity? Why do you need it? What is a common vulnerability with ecrecover?
 
-<a id="ecrecover"></a>
-<a href="https://soliditydeveloper.com/ecrecover">https://soliditydeveloper.com/ecrecover</a>
+Smart contracts have access to the built-in ECDSA signature verification algorithm through the system method ecrecover. The following example illustrates the use of this function:
 
-Why do you need it?
+```
+address signer = ecrecover(msgHash, v, r, s);
+```
+
+The method takes the signature values v, r and s and the keccak256 hash of the signed data as arguments. It validates the integrity of the data, meaning that the signature corresponds to the hash of the data and recovers the signer’s address (Ethereum addresses are derived from public keys).
+
+Any additional checks on whether this signer address corresponds to the expected address, or whether the signed message is unique, have to be added by the smart contract programmer. Misunderstanding this behavior of ecrecover frequently leads to security vulnerabilities.
+
+<b>Signature Replay Vulnerability</b>
+
+Consider this code:
+
+```
+function unlock(
+  address _to,
+  uint256 _amount,
+  uint8[] _v,
+  bytes32[] _r,
+  bytes32[] _s
+)
+  external
+{
+  require(_v.length >= 5);
+  bytes32 hashData = keccak256(_to, _amount);
+  for (uint i = 0; i < _v.length; i++) {
+    address recAddr = ecrecover(hashData, _v[i], _r[i], _s[i]);
+    require(_isValidator(recAddr));
+  }
+  to.transfer(_amount);
+}
+
+```
+
+The problem with the above code is in the message that is signed by the validators using the ECDSA algorithm. The message only contains the receiver address and the amount to be unlocked. There is nothing in the message that could be used to prevent the same signatures to be used multiple times.
+
+<b>Mitigation</b>
+
+The above scenario is called a signature replay attack. It is possible because there is no way of checking the uniqueness of this particular signed message or whether the signed message has been used before.
+
+A simple way to avoid this type of attack is to include a sequential message number or nonce in the signed data. The fixed version of the above code would be as follows:
+
+```
+public uint256 nonce;
+function unlock(
+  address _to,
+  uint256 _amount,
+  uint256 _nonce,
+  uint8[] _v,
+  bytes32[] _r,
+  bytes32[] _s
+)
+  external
+{
+  require(_v.length >= 5);
+  require(_nonce == nonce++);
+  bytes32 hashData = keccak256(_to, _amount, _nonce);
+  for (uint i = 0; i < _v.length; i++) {
+    address recAddr = ecrecover(hashData, _v[i], _r[i], _s[i]);
+    require(_isValidator(recAddr));
+  }
+  to.transfer(_amount);
+}
+```
+
+Signature Best Practice
+The above example is just one example, in which non-unique signatures can be replayed. In most scenarios, it is important to make sure signatures are uniquely matched to each call, in order to prevent replay attacks. This is also the reason Ethereum transactions themselves include a nonce (just like in our solution above).
+
+However, the code is not yet perfect. It does not follow the recommended best practice for signature verification. The reason for this is that <b>it does not check for malleable signatures</b> (see next question). s values that are part of accepted signatures should be checked to be in lower ranges. The recommended procedure for using the ecrecover function can found in Open Zeppelin’s excellent ECDSA library. In fact, building on community audited code, such as Open Zeppelin, is always a good idea.
+
+Read more: <a href="https://soliditydeveloper.com/ecrecover">https://soliditydeveloper.com/ecrecover</a>
+
+Why do you need ecrecover for?
 
 - Meta Transactions - aka Gasless transaction
 - ERC20-Permit
 
-## (27) What is a relayer? How do they submit a transaction in name of another user?
+## (27) What is Signature Malleability vulnerability?
+
+Signature Malleability is a vulnerability that can occur when improperly utilizing ECDSA (Elliptic Curve Digital Signature Algorithm) signatures. The vulnerability allows an attacker to change the signature slightly without invalidating the signature itself.
+
+It's generally assumed that a valid signature cannot be modified without the private key and remain valid. However, it is possible to modify and signature and maintain validity. One example of a system which is vulnerable to signature malleability is one in which validation as to whether an action can be executed is determined based on whether the signature has been previously used.
+
+```
+// UNSECURE
+require(!signatureUsed[signature]);
+
+// Validate signer and perform state modifying logic
+...
+
+signatureUsed[signature] = true;
+
+```
+
+<b>Mitigation</b>
+
+To avoid this issue, it's imperative to recognize that validating that a signature is not reused is insufficient in enforcing that the transaction is not replayed.
+
+<a href="https://github.com/kadenzipfel/smart-contract-vulnerabilities/blob/master/vulnerabilities/signature-malleability.md">Read more here</a>
+
+## (28) What is a relayer? How do they submit a transaction in name of another user?
 
 In a meta transaction, the user’s transaction is actually executed by another account that pays the gas fees on their behalf. This account is known as a “relayer”, and it can be a contract or a regular Ethereum account. The relayer receives the transaction from the user, signs it with its own private key, and then submits it to the network to be mined. The user’s transaction is essentially wrapped in a second transaction that pays the gas fees, allowing the user to interact with the contract without having to pay for gas themselves.
 
-## (28) Explain the EVM stack. Its Max Depth, Size and why chosen this way.
+## (29) Explain the EVM stack. Its Max Depth, Size and why chosen this way.
 
 The EVM runs as a stack machine with a depth of 1024 items. Each item is a 256 bit word (32 bytes), which was chosen due its compatibility with 256-bit encryption. Since the EVM is a stack-based VM, you typically PUSH data onto the top of it, POP data off, and apply instructions like ADD or MUL to the first few values that lay on top of it.
 
 It follow the LIFO (Last In, First Out) principle, where the last element to be added is the first element to be removed. If you use the MUL opcode (which multiplies the two values at the top of the stack), top item #1 and top item #2 get popped from the stack and replaced by their product.
 
-## (29) Explain Memory and Calldata.
+## (30) Explain Memory and Calldata.
 
 In the EVM, memory can be thought of as an expandable, byte-addressed, 1 dimensional array. It starts out being empty, and it costs gas to read, write to, and expand it. Calldata on the other hand is very similar, but it is NOT able to be expanded or overwritten. It is included in the transaction's payload, and acts as input for contract calls.
 
@@ -500,13 +595,13 @@ Storing to memory will always write bytes to the first 256 bits (32 bytes or 1 w
 
 Memory and calldata are not persistent, they are volatile- after the transaction finishes executing, they are forgotten.
 
-## (30) What's the size of contract Storage?
+## (31) What's the size of contract Storage?
 
 There are a total of 2^256 storage slots due to the 32 byte key size.
 
 A smart contract's storage consists of 2²⁵⁶ slots, where each slot can contain values of size up to 32 bytes. Under the hood, the contract storage is a key-value store, where 256 bits keys map to 256 bits values.
 
-## (30) What's the difference between string and bytes?
+## (32) What's the difference between string and bytes?
 
 Solidity supports String literal using both double quote (") and single quote ('). It provides string as a data type to declare a variable of type String.
 
