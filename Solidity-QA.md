@@ -429,13 +429,18 @@ Many blockchains use different “consensus algorithms” to help defend against
 
 These consensus algorithms don’t actually prevent Sybil attacks, they just make it very impractical for an attacker to successfully carry out a Sybil attack.
 
-## (21) What are Slither, Echidna, Mithril ?
+## (21) What are Slither, Echidna, Mithril, Manticore, Echidna ?
 
 - Slither - Slither is a Solidity static analysis framework written in Python3. It runs a suite of vulnerability detectors, prints visual information about contract details, and provides an API to easily write custom analyses.
 
 - Echidna - Echidna is a Haskell program designed for fuzzing/property-based testing of Ethereum smart contracts. It uses sophisticated grammar-based fuzzing campaigns based on a contract ABI to falsify user-defined predicates or Solidity assertions
 
 - Mithril - Mythril is a security analysis tool for EVM bytecode. It detects security vulnerabilities in smart contracts built for Ethereum, Hedera, Quorum, Vechain, Roostock, Tron and other EVM-compatible blockchains. It uses symbolic execution, SMT solving and taint analysis to detect a variety of security vulnerabilities. It's also used (in combination with other tools and techniques) in the MythX security analysis platform.
+
+- Manticore - Manticore is a symbolic execution tool for the analysis of smart contracts and binaries.
+
+
+- Echidna is a next-generation Ethereum smart contract fuzzer built the by security solutions company - Trail of Bits. As an evaluation tool, Echidna is known for its unique 'property-based fuzzing' which tries to falsify user-defined invariants (properties) instead of looking for crashes like a traditional fuzzer.
 
 ## (22) Why is Ethers.JS better than Web3 ?
 
@@ -657,6 +662,11 @@ string message = string(bstr);
 ## (34) Inheritance, Inheritance Order and the super keyword: A bit about these...
 
 - <a href="https://medium.com/@kalexotsu/inheritance-inheritance-order-and-the-super-keyword-in-solidity-bbe49a2478b6">Inheritance, Inheritance Order, and the 'super' Keyword in Solidity</a>
+
+
+## (35) What is WAD? What is fixed point logic?
+
+In general, we should ensure that numerators are sufficiently larger than denominators to avoid precision errors. A common solution to this problem is to use fixed point logic, i.e. raising integers to a sufficient number of decimals such that the lack of precision has minimal effect on the contract logic. A good rule of thumb is to raise numbers to 1e18 (commonly referred to as WAD).
 
 # Easy Questions
 
