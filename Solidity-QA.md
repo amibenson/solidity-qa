@@ -826,6 +826,7 @@ This separation provides an alternative to the fallback function for contracts t
 
 Reentrancy is a programming technique in which a function execution is interrupted by an external function call. Within the the logic of the external function call are conditions that allow it to recursively call itself before the original function execution is able to complete.
 
+<a href="https://github.com/jcsec-security/all-things-reentrancy">More on reentrancy</a>
 ## (21) As of the Shanghai upgrade, what is the gas limit per block?
 
 ## (22) What prevents infinite loops from running forever in view functions?
