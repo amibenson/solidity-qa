@@ -10,6 +10,8 @@ Questions are based on <a href="https://www.rareskills.io/post/solidity-intervie
 
 https://www.youtube.com/watch?v=Zf1tWIQ2vh8&t=21:00
 
+<a href="https://www.beirao.xyz/blog/automatedBrainProcess">https://www.beirao.xyz/blog/automatedBrainProcess</a>
+
 ## (0) What are libraries in Solidity? Give example of some popular libraries.
 
 A library in Solidity is a different type of smart contract that contains reusable code. Once deployed on the blockchain (only once), it is assigned a specific address and its properties / methods can be reused many times by other contracts in the Ethereum network.
