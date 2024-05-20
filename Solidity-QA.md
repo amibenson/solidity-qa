@@ -1412,6 +1412,13 @@ Negative values are more expensive in calldata - Negative values have leading by
 
 ## (29) What is a nullifier in the context of zero knowledge, and what is it used for?
 
+## (30) OpenZeppelin is a great and popular smart contract library. What other viable alternatives it has?
+
+Two examples of such alternatives are <a href="https://github.com/transmissions11/solmate">Solmate</a> and <a href="https://github.com/Vectorized/solady">Solady</a>.
+
+
+
+
 # More resources:
 
 ## Memory vs Storage & When to Use Them
